@@ -1,0 +1,49 @@
+# Ignorar carpetas de NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.build-impl.xml
+
+# Archivos de compilación
+/build/
+/out/
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de logs
+*.log
+
+# Archivos de configuración de IDE (opcional)
+/.idea/
+/.vscode/
+
+# Archivos de Maven o Gradle (si aplica)
+target/
+*.class
+*.war
+*.ear
+
+# Archivos de configuración temporales o de usuario
+*.swp
+*.bak
+*.tmp
+*.orig
+*.rej
+
+# Librerías descargadas
+/.mvn/
+.gradle/
+/.gradle-cache/
+
+# Archivos específicos de Java
+*.iml
+*.ipr
+*.iws
+
+# Evitar incluir variables de entorno o secretos
+.env
+*.key
+*.pem
