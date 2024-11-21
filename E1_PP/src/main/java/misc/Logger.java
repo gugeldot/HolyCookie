@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Logger {
+
     private String path;
 
     public Logger(String path, boolean reset) {
@@ -40,11 +41,11 @@ public class Logger {
          */
 
         File archivo = new File(this.path);
-        if (archivo.exists()) { 
+        if (archivo.exists()) {
             if (!archivo.delete()) { // Error si se bloquea el borrado
                 System.err.println("Error al eliminar el archivo.");
             }
-        } 
+        }
     }
 
     private void checkExist() {
@@ -100,4 +101,22 @@ public class Logger {
         write(cadena);
     }
 
+    // Sobrecarga de metodo para aceptar dos autores
+    public void add(String author, String author2, String msg) {
+        /*
+            OBJ: Metodo publico para que cualquiera pueda introducir linea nueva
+                    al log. 
+                    Nota: Se introduce la fecha de creacion)
+            PRE: Introducir Autor (2) y el propio mensaje
+            POST:  Datos escritos
+         */
+
+        String cadena;
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        String date = LocalDateTime.now().format(formato);
+
+        cadena = "[" + author + "] [" + author2 + "] [" + date + "]: " + msg;
+
+        write(cadena);
+    }
 }
