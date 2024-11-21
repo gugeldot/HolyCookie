@@ -10,7 +10,7 @@ public class Main {
         
         Logger logger = new Logger("../evolucionGalletas.txt",false); 
         
-        Almacen almacen = new Almacen(1000,logger);
+        Almacen almacen = new Almacen("ALMACEN1",1000,logger);
         
         
         
