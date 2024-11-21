@@ -9,7 +9,7 @@ public class Main {
         Logger logger = new Logger("../evolucionGalletas.txt",false); 
         
         
-        logger.add("MAIN", "Holaaa");
+        
         
     }
 }
