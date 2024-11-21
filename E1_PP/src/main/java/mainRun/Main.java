@@ -11,7 +11,5 @@ public class Main {
         
         Almacen almacen = new Almacen("ALMACEN1",1000,logger);
         
-        
-        
     }
 }
