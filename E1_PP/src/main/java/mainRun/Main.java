@@ -11,5 +11,15 @@ public class Main {
         
         Almacen almacen = new Almacen("ALMACEN1",1000,logger);
         
+        int MAX_GALLETAS_HORNO = 200;
+        Horno[] arrayHornos = {new Horno("Horno1",MAX_GALLETAS_HORNO,logger),
+                               new Horno("Horno2",MAX_GALLETAS_HORNO,logger),
+                               new Horno("Horno3",MAX_GALLETAS_HORNO,logger) };
+        
+        AdministradorHornos adminHornos = new AdministradorHornos(arrayHornos,logger);
+        
+        
+        adminHornos.arrancarHornos();
+        
     }
 }
