@@ -6,12 +6,11 @@ import misc.Logger;
 import misc.Utilidades;
 
 /*
-*   Objetivo: Implementacion del almace
+*   Objetivo: Implementacion del almacen
     Notas: 
         + Aproximación mediante locks 
         + He usado locks y no semaforos porque veia poco intuitivo de entender
             e interorizar.
-    USO GENERAL: 
 *   Autor: Rodrigo Palomo 
  */
 
