@@ -1,4 +1,5 @@
 # Ignorar carpetas de NetBeans
+nbactions.xml
 /nbproject/private/
 /nbbuild/
 /dist/
@@ -47,3 +48,6 @@ target/
 .env
 *.key
 *.pem
+
+# Log del proyecto
+evolucionGalletas.txt
