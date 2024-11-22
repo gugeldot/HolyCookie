@@ -23,16 +23,18 @@ public class Horno extends Thread {
     private int capacidadMAX;                       // READONLY
     private int capacidad_actual = 0;
     private Logger logger;
+    private AdministradorHornos aH;
 
     // Lock y condition
     private final Lock lock = new ReentrantLock();
     private final Condition lleno = lock.newCondition();
     private final Condition vacio = lock.newCondition();
 
-    public Horno(String ID, int capacidadMAX, Logger logger) {
+    public Horno(String ID, int capacidadMAX, AdministradorHornos aH ,Logger logger) {
         this.ID = ID;
         this.capacidadMAX = capacidadMAX;
         this.logger = logger;
+        this.aH = aH;
     }
     
      /*
@@ -84,6 +86,7 @@ public class Horno extends Thread {
             else { 
                 capacidad_actual += cantidad; 
                 desperdicio = 0;
+                aH.notificarEspacioDisponible();
             }
 
             logger.add(ID, " Se han agregado " + (cantidad-desperdicio) + " galletas. Total: " + capacidad_actual);
@@ -117,6 +120,7 @@ public class Horno extends Thread {
             else {
                 retiradas = cantidad;
                 capacidad_actual -= cantidad;
+                
             }
             
             // Logger + signal de lock

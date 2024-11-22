@@ -14,11 +14,13 @@ public class Main {
         // Nota: Se ha puesto directorio anterior para que se muestre fuera del proyecto
         Logger logger = new Logger("../evolucionGalletas.txt", true);
         Almacen almacen = new Almacen("ALMACEN1", 1000, logger);
-
-        Horno[] arrayHornos = {new Horno("Horno1", MAX_GALLETAS_HORNO, logger),
-            new Horno("Horno2", MAX_GALLETAS_HORNO, logger),
-            new Horno("Horno3", MAX_GALLETAS_HORNO, logger)};
-        AdministradorHornos adminHornos = new AdministradorHornos(arrayHornos, logger);
+        
+        AdministradorHornos adminHorno; 
+        
+        Horno[] arrayHornos = {new Horno("Horno1", MAX_GALLETAS_HORNO,adminHornos, logger),
+            new Horno("Horno2", MAX_GALLETAS_HORNO, adminHornos,logger),
+            new Horno("Horno3", MAX_GALLETAS_HORNO, adminHornos,logger)};
+        adminHornos = new AdministradorHornos(arrayHornos, logger);
 
         adminHornos.arrancarHornos();
 
