@@ -70,7 +70,7 @@ public class Almacen {
             // Fin de la espera, "Ha entrado"
             capacidad_actual += cantidad;
 
-            Thread.sleep(Utilidades.numeroRandom(2, 4));
+            Thread.sleep(Utilidades.numeroRandom(2, 4)*1000);
 
             logger.add(ID,autor, "Se almacenaron " + cantidad + " galletas. Capacidad actual: " + capacidad_actual);
             
