@@ -21,6 +21,6 @@ public class AdministradorHornos {
         for (Horno horno : arrayDeHornos)  {
             horno.start();
         }
-        logger.add("AdminHornos", "Hornos arrancados");
+        logger.add("AdminHornos", "Todos los hornos arrancados");
     }
 }

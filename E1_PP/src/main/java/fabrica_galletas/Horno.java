@@ -6,6 +6,15 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import misc.Logger;
 
+/*
+*   Objetivo: Implementacion del horno
+    Notas: 
+        + Aproximación mediante locks 
+        + Se intentó con monitores pero las condiciones con locks lo hacen 
+            mucho mas flexible con los signal
+*   Autor: Rodrigo Palomo 
+*/
+
 public class Horno extends Thread {
 
     // Variables y constantes
@@ -15,7 +24,7 @@ public class Horno extends Thread {
     private int capacidad_actual = 0;
     private Logger logger;
 
-    // Lock y Conditions
+    // Lock y condition
     private final Lock lock = new ReentrantLock();
     private final Condition lleno = lock.newCondition();
     private final Condition vacio = lock.newCondition();
@@ -25,15 +34,32 @@ public class Horno extends Thread {
         this.capacidadMAX = capacidadMAX;
         this.logger = logger;
     }
-
+    
+    /*
+            OBJ: getter ID
+            PRE: -
+            POST: -  
+    */
     public String getID() {
         return ID;
     }
 
+    /*
+            OBJ: getter capacidad maxima
+            PRE: -
+            POST: -  
+    */
     public int getCapacidadMAX() {
         return capacidadMAX;
     }
-
+    
+    
+    /*
+            OBJ: Agrega galletas al horno hasta llegar a 200, si eso ocurre
+                    entonces libera el condition que inicia el horneado
+            PRE: -
+            POST: -  
+    */
     public int agregarGalletas(int cantidad) {
         int desperdicio = 0;
         lock.lock();
@@ -58,6 +84,13 @@ public class Horno extends Thread {
         return desperdicio;
     }
 
+    /*
+            OBJ: Retira galletas, siempre post-horneado, cuando las retire 
+                 todas entonces dará la senal para seguir recibiendo nuevas 
+                 galletas.
+            PRE: -
+            POST: -  
+    */
     public int retirarGalletas(int cantidad) {
         int retiradas; 
         lock.lock();
@@ -86,6 +119,12 @@ public class Horno extends Thread {
         return retiradas; 
     }
 
+    /*
+            OBJ: Ciclo principal del propio hilo, bloqueo de lock para esperar 
+                 horneado y para esperar retirada completa
+            PRE: -
+            POST: -  
+    */
     @Override
     public void run() {
         logger.add(ID, " Encendido!");
