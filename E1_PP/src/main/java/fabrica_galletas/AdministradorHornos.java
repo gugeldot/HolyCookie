@@ -11,7 +11,7 @@ public class AdministradorHornos {
         this.logger = logger;
     }
     
-    public int introducirGalletas() { 
+    public int introducirGalletas(int nGalletas) { 
         int galletas_desperdiciadas = 0;
         // TO DO!
         return galletas_desperdiciadas;

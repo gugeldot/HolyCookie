@@ -20,6 +20,20 @@ public class Main {
         
         adminHornos.arrancarHornos();
         
+        Repostero repostero1 = new Repostero("Repostero1", adminHornos);
+        Repostero repostero2 = new Repostero("Repostero2", adminHornos);
+        Repostero repostero3 = new Repostero("Repostero3", adminHornos);
+        Repostero repostero4 = new Repostero("Repostero4", adminHornos);
+        Repostero repostero5 = new Repostero("Repostero5", adminHornos);
+        
+        
+        repostero1.start();
+        repostero2.start();
+        repostero3.start();
+        repostero4.start();
+        repostero5.start();
+        
+        
         /*
         // Pruebas con hornos (habria que hacer el metodo de adminHornos para 
         // que gestionen ellos las adiciones
