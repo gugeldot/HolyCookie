@@ -22,10 +22,12 @@ public class Main {
 
         adminHornos.arrancarHornos();
 
+        Cafeteria cafeteria = new Cafeteria(logger);
+                
         // Indexados en array para no perder acceso a cualquiera de ellos
         Repostero[] reposteros = new Repostero[NUMERO_REPOSTEROS]; 
         for (int i = 0; i < reposteros.length; i++) {
-            reposteros[i] = new Repostero("Repostero" + (i + 1), adminHornos, logger);
+            reposteros[i] = new Repostero("Repostero" + (i + 1), adminHornos, logger, cafeteria);
             reposteros[i].start();
         }
 
