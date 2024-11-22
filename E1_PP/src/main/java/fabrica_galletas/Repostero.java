@@ -17,8 +17,9 @@ public class Repostero extends Thread {
     private Random random;
     private AdministradorHornos adm;
     private Logger logger;
+    private Cafeteria cafeteria;
 
-    public Repostero(String id, AdministradorHornos adm, Logger logger) {
+    public Repostero(String id, AdministradorHornos adm, Logger logger, Cafeteria cafeteria) {
         this.id = id;
         this.galletasProducidas = 0;
         this.tandasProducidas = 0;
@@ -26,6 +27,7 @@ public class Repostero extends Thread {
         this.random = new Random();
         this.adm = adm;
         this.logger = logger;
+        this.cafeteria = cafeteria;
     }
 
     public void producirGalletas() throws InterruptedException {
@@ -48,20 +50,20 @@ public class Repostero extends Thread {
     }
 
     public void descansar() throws InterruptedException {
-        System.out.println(id + " está descansando.");
+        System.out.println(id + " esta descansando.");
         logger.add(id, " está descansando.");
-        Thread.sleep(2000); // Prepara café (2 segundos)
+        cafeteria.usarCafetera(id);
         Thread.sleep(Utilidades.numeroRandom(3000, 6000)); // Descanso entre 3 y 6 segundos
 
-        logger.add(id, " terminó de descansar.");
-        System.out.println(id + " terminó de descansar.");
+        logger.add(id, " termino de descansar.");
+        System.out.println(id + " termino de descansar.");
     }
 
     @Override
     public void run() {
         try {
             while (true) {
-                int tandas = random.nextInt(3) + 3; // De 3 a 5 tandas antes de descansar
+                int tandas = Utilidades.numeroRandom(3, 5); // De 3 a 5 tandas antes de descansar
 
                 for (int i = 0; i < tandas; i++) {
                     producirGalletas();  // Produce una tanda
