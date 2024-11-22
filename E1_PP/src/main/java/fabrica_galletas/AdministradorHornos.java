@@ -1,12 +1,10 @@
 package fabrica_galletas;
 
-
 import misc.Logger;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
 
 public class AdministradorHornos {
 
@@ -26,6 +24,7 @@ public class AdministradorHornos {
     private boolean todosLlenos() {
         for (Horno horno : arrayDeHornos) {
             if (!horno.estaLleno()) {
+                //hornosDisponibles.signalAll();
                 return false;
             }
         }
@@ -36,8 +35,6 @@ public class AdministradorHornos {
         lock.lock(); // Asegurar exclusión mutua
         try {
             int galletas = nGalletas;
-            
-
             // Mientras todos los hornos estén llenos, el hilo debe esperar
             while (todosLlenos()) {
                 logger.add(ID, "Todos los hornos llenos. Esperando...");
@@ -53,26 +50,39 @@ public class AdministradorHornos {
 
                     System.out.println("Metiendo " + galletas + " en " + horno.getID());
                     break; // Sale del bucle cuando logra colocar las galletas
-                }
-                else {
-                    logger.add(ID,horno.getID() + "Lleno, pasando al siguiente");
+                } else {
+                    logger.add(ID, horno.getID() + "Lleno, pasando al siguiente");
                 }
             }
 
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             logger.add(ID, "Interrumpido mientras intentaba introducir galletas.");
-        } finally { lock.unlock(); }
-    }
-
-    public void notificarEspacioDisponible() {
-        lock.lock();
-        try {
-            hornosDisponibles.signalAll(); // Notificar a todos los hilos que pueden intentar colocar galletas
         } finally {
             lock.unlock();
         }
     }
+
+public int retirarGalletas(int cantidad) {
+        int retiradas = 0;
+        lock.lock();
+        try {
+            // Caluclar retiradas para que no salga negativo
+            retiradas = arrayDeHornos[0].retirarGalletas(cantidad);
+            hornosDisponibles.signalAll();
+            System.out.println("Signal hecha");
+        } 
+        catch(Exception e){
+            System.out.println(e);
+        }    
+        finally {
+            lock.unlock();
+        }
+        return retiradas;
+    }
+    
+
+    
 
     public void arrancarHornos() {
         for (Horno horno : arrayDeHornos) {
@@ -80,4 +90,6 @@ public class AdministradorHornos {
         }
         logger.add("AdminHornos", "Todos los hornos arrancados");
     }
+    
+    
 }

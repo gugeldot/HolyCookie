@@ -15,12 +15,11 @@ public class Main {
         Logger logger = new Logger("../evolucionGalletas.txt", true);
         Almacen almacen = new Almacen("ALMACEN1", 1000, logger);
         
-        AdministradorHornos adminHorno; 
+        Horno[] arrayHornos = {new Horno("Horno1", MAX_GALLETAS_HORNO, logger),
+            new Horno("Horno2", MAX_GALLETAS_HORNO,logger),
+            new Horno("Horno3", MAX_GALLETAS_HORNO,logger)};
         
-        Horno[] arrayHornos = {new Horno("Horno1", MAX_GALLETAS_HORNO,adminHornos, logger),
-            new Horno("Horno2", MAX_GALLETAS_HORNO, adminHornos,logger),
-            new Horno("Horno3", MAX_GALLETAS_HORNO, adminHornos,logger)};
-        adminHornos = new AdministradorHornos(arrayHornos, logger);
+        AdministradorHornos adminHornos = new AdministradorHornos(arrayHornos, logger);
 
         adminHornos.arrancarHornos();
 
@@ -33,6 +32,8 @@ public class Main {
         }
          */
         
+        
+        // Reposteros
         Thread thread = new Thread(() -> {
             adminHornos.introducirGalletas(500);
             adminHornos.introducirGalletas(500);
@@ -40,10 +41,13 @@ public class Main {
             adminHornos.introducirGalletas(500);
         });
 
+        // Empaquetadores
         Thread thread2 = new Thread(() -> {
             try {
                 Thread.sleep(2000);
-                arrayHornos[0].retirarGalletas(300);
+                System.out.println("Hola");
+                adminHornos.retirarGalletas(300);
+               
             } catch (InterruptedException ex) {
                 System.out.println(ex);
             }
