@@ -20,11 +20,11 @@ public class Main {
         
         adminHornos.arrancarHornos();
         
-        Repostero repostero1 = new Repostero("Repostero1", adminHornos);
-        Repostero repostero2 = new Repostero("Repostero2", adminHornos);
-        Repostero repostero3 = new Repostero("Repostero3", adminHornos);
-        Repostero repostero4 = new Repostero("Repostero4", adminHornos);
-        Repostero repostero5 = new Repostero("Repostero5", adminHornos);
+        Repostero repostero1 = new Repostero("Repostero1", adminHornos,logger);
+        Repostero repostero2 = new Repostero("Repostero2", adminHornos,logger);
+        Repostero repostero3 = new Repostero("Repostero3", adminHornos,logger);
+        Repostero repostero4 = new Repostero("Repostero4", adminHornos,logger);
+        Repostero repostero5 = new Repostero("Repostero5", adminHornos,logger);
         
         
         repostero1.start();
