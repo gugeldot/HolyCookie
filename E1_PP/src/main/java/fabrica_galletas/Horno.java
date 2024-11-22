@@ -35,6 +35,17 @@ public class Horno extends Thread {
         this.logger = logger;
     }
     
+     /*
+            OBJ: Comprobar si horno esta lleno
+            PRE: -
+            POST: -  
+    */
+    
+    public boolean estaLleno(){
+        return capacidad_actual == capacidadMAX;
+        
+    }
+    
     /*
             OBJ: getter ID
             PRE: -
@@ -70,9 +81,12 @@ public class Horno extends Thread {
                 logger.add(ID, "No caben todas, galletas a tirar: " + desperdicio);
                 capacidad_actual = capacidadMAX;
             } 
-            else { capacidad_actual += cantidad; }
+            else { 
+                capacidad_actual += cantidad; 
+                desperdicio = 0;
+            }
 
-            logger.add(ID, " Se han agregado " + cantidad + " galletas. Total: " + capacidad_actual);
+            logger.add(ID, " Se han agregado " + (cantidad-desperdicio) + " galletas. Total: " + capacidad_actual);
 
             // Si el horno se llena, notificar al hilo del horno
             if (capacidad_actual == capacidadMAX) 
