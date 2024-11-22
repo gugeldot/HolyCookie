@@ -14,7 +14,6 @@ public class Repostero extends Thread {
     private int galletasProducidas;
     private int tandasProducidas;
     private boolean descansando;
-    private Horno hornoActual;
     private Random random;
     private AdministradorHornos adm;
     private Logger logger;
