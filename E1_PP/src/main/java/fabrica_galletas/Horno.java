@@ -76,7 +76,7 @@ public class Horno extends Thread {
             desperdicio = (capacidad_actual + cantidad) - capacidadMAX;
 
             if (desperdicio > 0) {
-                logger.add(ID, "No caben todas, galletas a tirar: " + desperdicio);
+                logger.add(ID, "No caben todas, galletas desechadas: " + desperdicio);
                 capacidad_actual = capacidadMAX;
             } else {
                 capacidad_actual += cantidad;

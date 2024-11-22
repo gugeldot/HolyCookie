@@ -39,15 +39,21 @@ public class Main {
             adminHornos.introducirGalletas(500);
             adminHornos.introducirGalletas(500);
             adminHornos.introducirGalletas(500);
+            adminHornos.introducirGalletas(500);
+            adminHornos.introducirGalletas(500);
         });
 
         // Empaquetadores
         Thread thread2 = new Thread(() -> {
             try {
                 Thread.sleep(2000);
-                System.out.println("Hola");
-                adminHornos.retirarGalletas(300);
+                adminHornos.retirarGalletas(0,300);
+                 Thread.sleep(2000);
+                adminHornos.retirarGalletas(1,300);
+                 Thread.sleep(2000);
+                adminHornos.retirarGalletas(2,300);
                
+                System.out.println("Done!");
             } catch (InterruptedException ex) {
                 System.out.println(ex);
             }
