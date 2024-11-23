@@ -24,7 +24,7 @@ public class Repostero extends Thread {
     private Horno[] arrayDeHornos;
   
     private final Lock lock = new ReentrantLock();
-    private final Condition hornosDisponibles = lock.newCondition();
+    //private final Condition hornosDisponibles = lock.newCondition();
 
     public Repostero(String ID, Horno[] arrayDeHornos, Cafeteria cafeteria, Logger logger) {
         this.ID = ID;
@@ -59,27 +59,19 @@ public class Repostero extends Thread {
     public synchronized void introducirGalletas(int nGalletas) throws InterruptedException {
         int galletas = nGalletas;
         // Intentar colocar las galletas en el primer horno disponible
-        
-        
-        /*
-        AYUDA AQUI YA! PROBLEMA! -> Si bloqueo aqui el hilo con un condition
-        y el condition solo lo puede levantar el sacar cosas del horno entonces que hacemos
-        porque desde horno no se puede acceder a esta condition
-        
-        Por ahora esta la chapuza esta del while y sleep
-        */
+
         while (todosLlenos()) {
             logger.add(ID, "Todos los hornos llenos. Esperando...");
-            System.out.println("Todos los hornos llenos. Esperando...");
+            //System.out.println("Todos los hornos llenos. Esperando...");
             Thread.sleep(Utilidades.numeroRandom(1500, 2000));
             //hornosDisponibles.await();
         }
 
         for (Horno horno : arrayDeHornos) {
             if (!horno.estaLleno()) {
-                logger.add(ID, galletas + " colocadas en " + horno.getID());
                 horno.agregarGalletas(galletas);
-                System.out.println("Metiendo " + galletas + " en " + horno.getID());
+                logger.add(ID, galletas + " colocadas en " + horno.getID());
+                //System.out.println("Metiendo " + galletas + " en " + horno.getID());
                 break; // Sale del bucle cuando logra colocar las galletas
             } else {
                 logger.add(ID, horno.getID() + " Lleno, pasando al siguiente");
@@ -94,25 +86,25 @@ public class Repostero extends Thread {
         int galletas = Utilidades.numeroRandom(37, 45); // Genera entre 37 y 45 galletas
         galletasProducidas += galletas;
         tandasProducidas++;
-        System.out.println(ID + " produjo " + galletas + " galletas. Total producidas: " + galletasProducidas);
+        //System.out.println(ID + " produjo " + galletas + " galletas. Total producidas: " + galletasProducidas);
         logger.add(ID, " produjo " + galletas + " galletas. Total producidas: " + galletasProducidas);
     }
 
     public synchronized void depositarEnHorno() throws InterruptedException {
-        System.out.println(ID + " intentar depositar " + galletasProducidas + " galletas.");
+        //System.out.println(ID + " intentar depositar " + galletasProducidas + " galletas.");
         logger.add(ID, " intentar depositar " + galletasProducidas + " galletas.");
         introducirGalletas(galletasProducidas);
         galletasProducidas = 0; // Resetea la cantidad tras depositar
     }
 
     public void descansar() throws InterruptedException {
-        System.out.println(ID + " esta descansando.");
+        //System.out.println(ID + " esta descansando.");
         logger.add(ID, " está descansando.");
         cafeteria.usarCafetera(ID);
         Thread.sleep(Utilidades.numeroRandom(3000, 6000)); // Descanso entre 3 y 6 segundos
 
         logger.add(ID, " termino de descansar.");
-        System.out.println(ID + " termino de descansar.");
+        //System.out.println(ID + " termino de descansar.");
     }
 
     @Override
@@ -130,8 +122,8 @@ public class Repostero extends Thread {
                 tandasProducidas = 0;
             }
         } catch (InterruptedException e) {
-            logger.add(ID, " fue interrumpido.");
-            System.out.println(ID + " fue interrumpido.");
+            logger.addE(ID, " fue interrumpido.");
+            //System.out.println(ID + " fue interrumpido.");
         }
     }
 

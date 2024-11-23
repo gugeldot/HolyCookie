@@ -82,7 +82,8 @@ public class Logger {
             System.err.println(e);
         }
     }
-
+    
+    
     public void add(String author, String msg) {
         /*
             OBJ: Metodo publico para que cualquiera pueda introducir linea nueva
@@ -120,5 +121,7 @@ public class Logger {
         write(cadena);
     }
     
-    
+    public void addE(String author,String msg){
+        add(author,"[[ERROR]]--"+ msg + "--[[ERROR]]");
+    }
 }

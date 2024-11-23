@@ -171,7 +171,7 @@ public class Horno extends Thread {
 
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
-                logger.add(ID, " Error, Horno detenido.");
+                logger.addE(ID, "Horno detenido.");
                 seguir = false;
             } finally {
                 lock.unlock();
