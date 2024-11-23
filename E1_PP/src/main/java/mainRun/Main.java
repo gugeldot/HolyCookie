@@ -2,50 +2,52 @@ package mainRun;
 
 import misc.Logger;
 import fabrica_galletas.*;
+import java.util.logging.Level;
+import misc.Utilidades;
 
 public class Main {
+    // PRUEBAS 
+    public static void proc_Simulador_repostero(Horno[] hornos){
+         // Crear y lanzar un hilo usando una expresión lambda
+        Thread hilo = new Thread(() -> {
+            while(true){
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException ex) {
+                    java.util.logging.Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                hornos[Utilidades.numeroRandom(0, 2)].retirarGalletas(200);
+            }
+        });
 
+        // Iniciar el hilo
+        hilo.start();
+    }
     public static void main(String[] args) throws InterruptedException {
-        final int  MAX_GALLETAS_HORNO = 200;
+        final int MAX_GALLETAS_HORNO = 200;
         final int NUMERO_REPOSTEROS = 5;
         
-        // Instancia inicial objeto logger, pasar por parametro a toda clase instanciada
-        // Nota: Se ha puesto directorio anterior para que se muestre fuera del proyecto
         Logger logger = new Logger("../evolucionGalletas.txt", true);
         Almacen almacen = new Almacen("ALMACEN1", 1000, logger);
 
-        
-        Horno[] arrayHornos = {new Horno("Horno1", MAX_GALLETAS_HORNO, logger),
-                               new Horno("Horno2", MAX_GALLETAS_HORNO, logger),
-                               new Horno("Horno3", MAX_GALLETAS_HORNO, logger)};
-        AdministradorHornos adminHornos = new AdministradorHornos(arrayHornos, logger);
+        Horno[] hornos = {  new Horno("Horno1", MAX_GALLETAS_HORNO, logger),
+                            new Horno("Horno2", MAX_GALLETAS_HORNO, logger),
+                            new Horno("Horno3", MAX_GALLETAS_HORNO, logger)};
 
-        adminHornos.arrancarHornos();
+        for (Horno horno : hornos) 
+            horno.start();
+        
 
         Cafeteria cafeteria = new Cafeteria(logger);
                 
         // Indexados en array para no perder acceso a cualquiera de ellos
-        Repostero[] reposteros = new Repostero[NUMERO_REPOSTEROS]; 
+        Repostero[] reposteros = new Repostero[NUMERO_REPOSTEROS];
         for (int i = 0; i < reposteros.length; i++) {
-            reposteros[i] = new Repostero("Repostero" + (i + 1), adminHornos, logger, cafeteria);
+            reposteros[i] = new Repostero("Repostero" + (i + 1), hornos, cafeteria, logger);
             reposteros[i].start();
         }
 
-        /*
-        // Pruebas con hornos (habria que hacer el metodo de adminHornos para 
-        // que gestionen ellos las adiciones
         
-        arrayHornos[0].agregarGalletas(180);
-        Thread.sleep(2000);
-        System.out.println("Ahora si");
-        arrayHornos[0].agregarGalletas(20);
-        
-        Thread.sleep (2000);
-        System.out.println("Ahora2");
-        arrayHornos[0].retirarGalletas(50);
-        arrayHornos[0].retirarGalletas(250);
-         */
-        
-        System.out.println("Todo arrancado!");
+        //proc_Simulador_repostero(hornos);
     }
 }
