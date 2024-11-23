@@ -36,8 +36,8 @@ public class Main {
 
         for (Horno horno : hornos) 
             horno.start();
-        
 
+   
         Cafeteria cafeteria = new Cafeteria(logger);
                 
         // Indexados en array para no perder acceso a cualquiera de ellos
@@ -46,7 +46,13 @@ public class Main {
             reposteros[i] = new Repostero("Repostero" + (i + 1), hornos, cafeteria, logger);
             reposteros[i].start();
         }
-
+           
+        // Inicializar los empaquetadores
+        Empaquetador[] empaquetadores = new Empaquetador[3];
+        for (int i = 0; i < empaquetadores.length; i++) {
+            empaquetadores[i] = new Empaquetador("Empaquetador" + (i + 1), hornos[i], almacen, logger);
+            empaquetadores[i].start();
+        }
         
         //proc_Simulador_repostero(hornos);
     }
