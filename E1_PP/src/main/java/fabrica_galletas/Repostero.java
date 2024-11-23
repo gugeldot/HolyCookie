@@ -4,7 +4,7 @@ package fabrica_galletas;
  *
  * @author David Serrano
  */
-import java.util.Random;
+
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -106,13 +106,13 @@ public class Repostero extends Thread {
     }
 
     public void descansar() throws InterruptedException {
-        System.out.println(id + " esta descansando.");
-        logger.add(id, " está descansando.");
-        cafeteria.usarCafetera(id);
+        System.out.println(ID + " esta descansando.");
+        logger.add(ID, " está descansando.");
+        cafeteria.usarCafetera(ID);
         Thread.sleep(Utilidades.numeroRandom(3000, 6000)); // Descanso entre 3 y 6 segundos
 
-        logger.add(id, " termino de descansar.");
-        System.out.println(id + " termino de descansar.");
+        logger.add(ID, " termino de descansar.");
+        System.out.println(ID + " termino de descansar.");
     }
 
     @Override
