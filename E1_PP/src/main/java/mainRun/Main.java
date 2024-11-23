@@ -23,44 +23,13 @@ public class Main {
 
         adminHornos.arrancarHornos();
 
-        /*
+        
         // Indexados en array para no perder acceso a cualquiera de ellos
         Repostero[] reposteros = new Repostero[NUMERO_REPOSTEROS]; 
         for (int i = 0; i < reposteros.length; i++) {
             reposteros[i] = new Repostero("Repostero" + (i + 1), adminHornos, logger);
             reposteros[i].start();
         }
-         */
-        
-        
-        // Reposteros
-        Thread thread = new Thread(() -> {
-            adminHornos.introducirGalletas(500);
-            adminHornos.introducirGalletas(500);
-            adminHornos.introducirGalletas(500);
-            adminHornos.introducirGalletas(500);
-            adminHornos.introducirGalletas(500);
-            adminHornos.introducirGalletas(500);
-        });
-
-        // Empaquetadores
-        Thread thread2 = new Thread(() -> {
-            try {
-                Thread.sleep(2000);
-                adminHornos.retirarGalletas(0,300);
-                 Thread.sleep(2000);
-                adminHornos.retirarGalletas(1,300);
-                 Thread.sleep(2000);
-                adminHornos.retirarGalletas(2,300);
-               
-                System.out.println("Done!");
-            } catch (InterruptedException ex) {
-                System.out.println(ex);
-            }
-        });
-
-        thread.start();
-        thread2.start();
 
         System.out.println("Todo arrancado!");
     }
