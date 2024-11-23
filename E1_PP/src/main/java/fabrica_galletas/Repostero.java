@@ -17,17 +17,20 @@ public class Repostero extends Thread {
     private int galletasProducidas = 0;
     private int tandasProducidas = 0;
     private boolean descansando = false;
-
+    
    
     private Logger logger;
+    private Cafeteria cafeteria;
     private Horno[] arrayDeHornos;
+  
     private final Lock lock = new ReentrantLock();
     private final Condition hornosDisponibles = lock.newCondition();
 
-    public Repostero(String ID, Horno[] arrayDeHornos, Logger logger) {
+    public Repostero(String ID, Horno[] arrayDeHornos, Cafeteria cafeteria, Logger logger) {
         this.ID = ID;
         this.logger = logger;
         this.arrayDeHornos = arrayDeHornos;
+        this.cafeteria = cafeteria;
     }
 
     /*
@@ -36,7 +39,6 @@ public class Repostero extends Thread {
             POST: -  
             EXTRA:
      */
-    
     private boolean todosLlenos() {
         for (Horno horno : arrayDeHornos) {
             if (!horno.estaLleno()) {
@@ -83,7 +85,6 @@ public class Repostero extends Thread {
                 logger.add(ID, horno.getID() + " Lleno, pasando al siguiente");
             }
         }
-
     }
 
     public void producirGalletas() throws InterruptedException {
@@ -105,13 +106,13 @@ public class Repostero extends Thread {
     }
 
     public void descansar() throws InterruptedException {
-        System.out.println(ID + " está descansando.");
-        logger.add(ID, " está descansando.");
-        Thread.sleep(2000); // Prepara café (2 segundos)
+        System.out.println(id + " esta descansando.");
+        logger.add(id, " está descansando.");
+        cafeteria.usarCafetera(id);
         Thread.sleep(Utilidades.numeroRandom(3000, 6000)); // Descanso entre 3 y 6 segundos
 
-        logger.add(ID, " terminó de descansar.");
-        System.out.println(ID + " terminó de descansar.");
+        logger.add(id, " termino de descansar.");
+        System.out.println(id + " termino de descansar.");
     }
 
     @Override
