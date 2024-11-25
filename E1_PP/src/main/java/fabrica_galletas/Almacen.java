@@ -67,6 +67,7 @@ public class Almacen {
                 logger.add(ID,autor, " Capacidad maxima, esperando turno...");
                 noLleno.await();
             }
+           
             // Fin de la espera, "Ha entrado"
             capacidad_actual += cantidad;
 
