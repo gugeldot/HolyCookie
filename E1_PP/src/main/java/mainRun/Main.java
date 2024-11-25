@@ -2,7 +2,7 @@ package mainRun;
 
 import misc.Logger;
 import fabrica_galletas.*;
-
+import INTERFAZ.Principal;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
@@ -36,6 +36,14 @@ public class Main {
             empaquetadores[i].start();
         }
         
+        
+     // Ejecuta el JFrame Principal
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new Principal().setVisible(true);
+            }
+        });
       
     }
 }
