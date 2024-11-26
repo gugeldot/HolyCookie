@@ -15,29 +15,25 @@ public class Repostero extends Thread {
     private String ID;
     private int galletasProducidas = 0;
     private int galletasDesperdiciadas = 0;
+   
     private int tandasProducidas = 0;
+    
     private boolean descansando = false;
+    private String situacion ;
     
     private Logger logger;
     private Cafeteria cafeteria;
     private Horno[] arrayDeHornos;
-
-    private final Lock lock = new ReentrantLock();
-
-    public String getID() {
-        return ID;
-    }
-
+    private int tandas = 0;
     
-    public boolean isDescansando() {
-        return descansando;
-    }
+    private final Lock lock = new ReentrantLock();
 
     public Repostero(String ID, Horno[] arrayDeHornos, Cafeteria cafeteria, Logger logger) {
         this.ID = ID;
         this.logger = logger;
         this.arrayDeHornos = arrayDeHornos;
         this.cafeteria = cafeteria;
+        situacion = "Iniciado";
     }
 
     /*
@@ -63,6 +59,7 @@ public class Repostero extends Thread {
         int galletas = nGalletas;
 
         while (todosLlenos()) {
+            situacion = "Esperando";
             logger.add(ID, "Todos los hornos llenos. Esperando...");
             Thread.sleep(Utilidades.numeroRandom(1500, 2000));
         }
@@ -109,12 +106,10 @@ public class Repostero extends Thread {
         POST: El hilo descansa durante un tiempo aleatorio antes de retomar la producción.
      */
     public void descansar() throws InterruptedException {
-        descansando = true;
         logger.add(ID, " está descansando.");
         cafeteria.usarCafetera(ID);
         Thread.sleep(Utilidades.numeroRandom(3000, 6000)); // Descanso entre 3 y 6 segundos
         logger.add(ID, " terminó de descansar.");
-        descansando = false;
     }
 
     /*
@@ -126,7 +121,7 @@ public class Repostero extends Thread {
     public void run() {
         try {
             while (true) {
-                int tandas = Utilidades.numeroRandom(3, 5); // De 3 a 5 tandas antes de descansar
+                tandas = Utilidades.numeroRandom(3, 5); // De 3 a 5 tandas antes de descansar
 
                 for (int i = 0; i < tandas; i++) {
                     producirGalletas();  // Produce una tanda
