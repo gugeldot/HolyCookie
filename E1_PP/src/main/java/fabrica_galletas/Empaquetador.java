@@ -9,13 +9,20 @@ public class Empaquetador extends Thread {
     private Almacen almacen;
     private int galletasEmpaquetadas;
     private Logger logger;
-
+    private String estado;
+    private int tanda = 0;
+    
     public Empaquetador(String id, Horno hornoAsignado, Almacen almacen, Logger logger) {
         this.id = id;
         this.hornoAsignado = hornoAsignado;
         this.almacen = almacen;
         this.galletasEmpaquetadas = 0;
         this.logger = logger;
+        estado = "Iniciado";
+    }
+
+    public String getEstado() {
+        return estado;
     }
 
     /**
@@ -29,16 +36,24 @@ public class Empaquetador extends Thread {
     public void recogerGalletas() throws InterruptedException {
         int galletasRetiradas = hornoAsignado.retirarGalletas(20);
         if (galletasRetiradas > 0) {
+            tanda++;
+            estado = "Recogiendo tanda";
+            
             galletasEmpaquetadas += galletasRetiradas;
             String mensaje = id + " recogio " + galletasRetiradas + " galletas del " + hornoAsignado.getID() +
                              ". Total empaquetadas: " + galletasEmpaquetadas;
             logger.add(id, mensaje);
             Thread.sleep(Utilidades.numeroRandom(500, 1000));
         } else {
+            estado = "Esperando";
             String mensaje = id + " esperando porque el horno esta vacio.";
             logger.add(id, mensaje);
             Thread.sleep(Utilidades.numeroRandom(1000, 1500));
         }
+    }
+
+    public int getTanda() {
+        return tanda;
     }
 
     /**
@@ -50,11 +65,13 @@ public class Empaquetador extends Thread {
      */
     public void transportarAlmacen() throws InterruptedException {
         if (galletasEmpaquetadas >= 100) {
+            estado = "Transportando";
             String mensaje = id + " transporta " + galletasEmpaquetadas + " galletas al almacen.";
             logger.add(id, mensaje);
             Thread.sleep(Utilidades.numeroRandom(2000, 4000));
             almacen.almacenar(galletasEmpaquetadas, id);
             galletasEmpaquetadas = 0;
+            tanda = 0;
         }
     }
 
