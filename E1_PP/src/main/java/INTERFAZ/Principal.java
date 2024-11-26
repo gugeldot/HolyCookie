@@ -11,8 +11,9 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     Horno[] hornos;
     Cafeteria cafe;
     Repostero[] reposteros;
-
-    public Principal(Cafeteria cafe, Repostero[] reposteros, Horno[] hornos) {
+    Almacen almacen;
+    
+    public Principal(Cafeteria cafe, Repostero[] reposteros, Horno[] hornos, Almacen almacen) {
         initComponents();
         setLocationRelativeTo(null); // Centra la ventana en la pantalla
         setTitle("Fabrica Galletas -- Menu Principal "); // Asigna el título de la ventana
@@ -20,6 +21,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         this.cafe = cafe;
         this.hornos = hornos;
         this.reposteros = reposteros;
+        this.almacen = almacen;
 
     }
 
@@ -96,8 +98,8 @@ public String getEstadoCafetera2() {
         tanda3_emp3 = new javax.swing.JLabel();
         tanda4_emp3 = new javax.swing.JLabel();
         tanda5_emp3 = new javax.swing.JLabel();
-        botonComer = new javax.swing.JToggleButton();
         Label_cafetera1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -440,20 +442,19 @@ public String getEstadoCafetera2() {
         tanda5_emp3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         tanda5_emp3.setOpaque(true);
 
-        botonComer.setBackground(new java.awt.Color(204, 204, 204));
-        botonComer.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        botonComer.setText("COMER");
-        botonComer.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        botonComer.setOpaque(true);
-        botonComer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonComerActionPerformed(evt);
-            }
-        });
-
         Label_cafetera1.setBackground(new java.awt.Color(0, 0, 0));
         Label_cafetera1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         Label_cafetera1.setText("Descansando");
+
+        jButton1.setBackground(new java.awt.Color(204, 204, 204));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 0, 0));
+        jButton1.setText("COMER");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -504,7 +505,7 @@ public String getEstadoCafetera2() {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(tanda5_emp3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(tanda1_emp2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -515,8 +516,7 @@ public String getEstadoCafetera2() {
                                         .addComponent(tanda4_emp2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(tanda5_emp2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(botonComer, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(estado_almacen, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(estado_almacen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(estado_horno2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(Label_emp2)
@@ -525,7 +525,8 @@ public String getEstadoCafetera2() {
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                             .addGap(6, 6, 6)
                                             .addComponent(Label_numGalletas2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(Label_almacen, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(Label_almacen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(174, 174, 174)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -678,8 +679,8 @@ public String getEstadoCafetera2() {
                 .addComponent(Label_almacen, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(estado_almacen, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botonComer)
+                .addGap(9, 9, 9)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(85, 85, 85))
         );
 
@@ -697,9 +698,9 @@ public String getEstadoCafetera2() {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botonComerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonComerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botonComerActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        almacen.comer();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public void run() {
         while (true) {
@@ -719,6 +720,8 @@ public String getEstadoCafetera2() {
             estado_horno.setText(String.valueOf(hornos[0].isHorneando()));
             estado_horno2.setText(String.valueOf(hornos[1].isHorneando()));
             estado_horno3.setText(String.valueOf(hornos[2].isHorneando()));
+            
+            estado_almacen.setText(String.valueOf(almacen.getCapacidad_actual()));
         }
     }
 
@@ -744,7 +747,6 @@ public String getEstadoCafetera2() {
     private javax.swing.JLabel Label_repostero3;
     private javax.swing.JLabel Label_repostero4;
     private javax.swing.JLabel Label_repostero5;
-    private javax.swing.JToggleButton botonComer;
     private javax.swing.JLabel estado_almacen;
     private javax.swing.JLabel estado_cafetera;
     private javax.swing.JLabel estado_cafetera2;
@@ -759,6 +761,7 @@ public String getEstadoCafetera2() {
     private javax.swing.JLabel estado_repostero3;
     private javax.swing.JLabel estado_repostero4;
     private javax.swing.JLabel estado_repostero5;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel numero_galletas;
     private javax.swing.JLabel numero_galletas2;

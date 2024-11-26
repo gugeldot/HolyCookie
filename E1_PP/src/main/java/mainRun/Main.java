@@ -37,7 +37,7 @@ public class Main {
         }
         
         
-        Principal principal = new Principal(cafeteria,reposteros,hornos);
+        Principal principal = new Principal(cafeteria,reposteros,hornos,almacen);
         principal.setVisible(true);
         Thread thread = new Thread(principal); // Pasar Principal como Runnable a un Thread
         thread.start(); // Inicia el hilo, llamando al método run
