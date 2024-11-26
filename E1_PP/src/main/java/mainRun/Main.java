@@ -37,13 +37,10 @@ public class Main {
         }
         
         
-     // Ejecuta el JFrame Principal
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new Principal().setVisible(true);
-            }
-        });
+        Principal principal = new Principal(hornos);
+        principal.setVisible(true);
+        Thread thread = new Thread(principal); // Pasar Principal como Runnable a un Thread
+        thread.start(); // Inicia el hilo, llamando al método run
       
     }
 }

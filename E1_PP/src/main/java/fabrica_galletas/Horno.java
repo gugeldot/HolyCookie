@@ -22,6 +22,7 @@ public class Horno extends Thread {
     private int capacidadMAX;                       // READONLY
     private int capacidad_actual = 0;
     private Logger logger;
+    private boolean horneando = false;
 
     // Lock y condition
     private final Lock lock = new ReentrantLock();
@@ -136,6 +137,18 @@ public class Horno extends Thread {
         return retiradas;
     }
 
+    public boolean isHorneando() {
+        return horneando;
+    }
+
+    public void setHorneando(boolean horneando) {
+        this.horneando = horneando;
+    }
+
+    public int getCapacidad_actual() {
+        return capacidad_actual;
+    }
+
     /*
             OBJ: Ciclo principal del propio hilo, bloqueo de lock para esperar 
                  horneado y para esperar retirada completa
@@ -158,8 +171,10 @@ public class Horno extends Thread {
 
                 // Proceso de horneado
                 logger.add(ID, " Horneando...");
+                setHorneando(true);
                 Thread.sleep(DURACION_HORNEO);
                 logger.add(ID, " Horneado completado.");
+                setHorneando(false);
 
                 //  A espera de signal que horno este vacio (retirarGalletas)
                 while (capacidad_actual > 0) {
@@ -179,3 +194,4 @@ public class Horno extends Thread {
         }
     }
 }
+
