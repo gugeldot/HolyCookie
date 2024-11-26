@@ -1,6 +1,7 @@
 package INTERFAZ;
 
 import fabrica_galletas.*;
+import java.awt.Color;
 
 /**
  *
@@ -13,8 +14,8 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     Repostero[] reposteros;
     Almacen almacen;
     Empaquetador[] empaquetadores;
-    
-    public Principal(Cafeteria cafe, Repostero[] reposteros, Horno[] hornos,Empaquetador[] empaquetadores, Almacen almacen) {
+
+    public Principal(Cafeteria cafe, Repostero[] reposteros, Horno[] hornos, Empaquetador[] empaquetadores, Almacen almacen) {
         initComponents();
         setLocationRelativeTo(null); // Centra la ventana en la pantalla
         setTitle("Fabrica Galletas -- Menu Principal "); // Asigna el título de la ventana
@@ -26,22 +27,32 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         this.empaquetadores = empaquetadores;
     }
 
-public String getEstadoCafetera2() {
-    String resultado = " ";
-    for (Repostero rep : reposteros) {
-        if (rep.isDescansando() && !rep.getID().equals(cafe.getIdOcupado())) {
-            resultado += rep.getID() + ", ";
+    public String getEstadoCafetera2() {
+        String resultado = " ";
+        for (Repostero rep : reposteros) {
+            if (rep.isDescansando() && !rep.getID().equals(cafe.getIdOcupado())) {
+                resultado += rep.getID() + ", ";
+            }
+        }
+
+        // Eliminar la última coma y espacio si la longitud es mayor que 1
+        if (resultado.length() > 1) {
+            resultado = resultado.substring(0, resultado.length() - 2);
+        }
+
+        return resultado;
+    }
+
+// Retorna color de las casillas del estado empaquetador
+    public Color colorTandaEmpaquetador(int indice, int pos) {
+        // Se puede quitar si se quiere que cuando transporte se quede en rojo
+        boolean blankTransporte = true; //!empaquetadores[indice].getEstado().equals("Transportando");
+        if (empaquetadores[indice].getTanda() >= pos && blankTransporte) {
+            return Color.red;
+        } else {
+            return Color.white;
         }
     }
-
-    // Eliminar la última coma y espacio si la longitud es mayor que 1
-    if (resultado.length() > 1) {
-        resultado = resultado.substring(0, resultado.length() - 2);
-    }
-
-    return resultado;
-}
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -707,25 +718,43 @@ public String getEstadoCafetera2() {
         while (true) {
             estado_cafetera.setText(cafe.getIdOcupado());
             estado_cafetera2.setText(getEstadoCafetera2());
-            
+
             estado_repostero.setText(reposteros[0].getSituacion());
             estado_repostero2.setText(reposteros[1].getSituacion());
             estado_repostero3.setText(reposteros[2].getSituacion());
             estado_repostero4.setText(reposteros[3].getSituacion());
             estado_repostero5.setText(reposteros[4].getSituacion());
-            
+
             numero_galletas.setText(String.valueOf(hornos[0].getCapacidad_actual()));
             numero_galletas2.setText(String.valueOf(hornos[1].getCapacidad_actual()));
             numero_galletas3.setText(String.valueOf(hornos[2].getCapacidad_actual()));
-            
+
             estado_horno.setText(String.valueOf(hornos[0].isHorneando()));
             estado_horno2.setText(String.valueOf(hornos[1].isHorneando()));
             estado_horno3.setText(String.valueOf(hornos[2].isHorneando()));
-            
+
             estado_emp.setText(empaquetadores[0].getEstado());
             estado_emp2.setText(empaquetadores[1].getEstado());
             estado_emp3.setText(empaquetadores[2].getEstado());
-            
+
+            tanda1_emp1.setBackground(colorTandaEmpaquetador(0, 1));
+            tanda2_emp1.setBackground(colorTandaEmpaquetador(0, 2));
+            tanda3_emp1.setBackground(colorTandaEmpaquetador(0, 3));
+            tanda4_emp1.setBackground(colorTandaEmpaquetador(0, 4));
+            tanda5_emp1.setBackground(colorTandaEmpaquetador(0, 5));
+
+            tanda1_emp2.setBackground(colorTandaEmpaquetador(1, 1));
+            tanda2_emp2.setBackground(colorTandaEmpaquetador(1, 2));
+            tanda3_emp2.setBackground(colorTandaEmpaquetador(1, 3));
+            tanda4_emp2.setBackground(colorTandaEmpaquetador(1, 4));
+            tanda5_emp2.setBackground(colorTandaEmpaquetador(1, 5));
+
+            tanda1_emp3.setBackground(colorTandaEmpaquetador(2, 1));
+            tanda2_emp3.setBackground(colorTandaEmpaquetador(2, 2));
+            tanda3_emp3.setBackground(colorTandaEmpaquetador(2, 3));
+            tanda4_emp3.setBackground(colorTandaEmpaquetador(2, 4));
+            tanda5_emp3.setBackground(colorTandaEmpaquetador(2, 5));
+
             estado_almacen.setText(String.valueOf(almacen.getCapacidad_actual()));
         }
     }

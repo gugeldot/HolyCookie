@@ -10,6 +10,7 @@ public class Empaquetador extends Thread {
     private int galletasEmpaquetadas;
     private Logger logger;
     private String estado;
+    private int tanda = 0;
     
     public Empaquetador(String id, Horno hornoAsignado, Almacen almacen, Logger logger) {
         this.id = id;
@@ -35,7 +36,9 @@ public class Empaquetador extends Thread {
     public void recogerGalletas() throws InterruptedException {
         int galletasRetiradas = hornoAsignado.retirarGalletas(20);
         if (galletasRetiradas > 0) {
+            tanda++;
             estado = "Recogiendo tanda";
+            
             galletasEmpaquetadas += galletasRetiradas;
             String mensaje = id + " recogio " + galletasRetiradas + " galletas del " + hornoAsignado.getID() +
                              ". Total empaquetadas: " + galletasEmpaquetadas;
@@ -47,6 +50,10 @@ public class Empaquetador extends Thread {
             logger.add(id, mensaje);
             Thread.sleep(Utilidades.numeroRandom(1000, 1500));
         }
+    }
+
+    public int getTanda() {
+        return tanda;
     }
 
     /**
@@ -64,6 +71,7 @@ public class Empaquetador extends Thread {
             Thread.sleep(Utilidades.numeroRandom(2000, 4000));
             almacen.almacenar(galletasEmpaquetadas, id);
             galletasEmpaquetadas = 0;
+            tanda = 0;
         }
     }
 
