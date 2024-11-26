@@ -23,6 +23,7 @@ public class Horno extends Thread {
     private int capacidad_actual = 0;
     private Logger logger;
     private boolean horneando = false;
+    private boolean horneadas = false;
 
     // Lock y condition
     private final Lock lock = new ReentrantLock();
@@ -107,30 +108,32 @@ public class Horno extends Thread {
             POST: -  
      */
     public int retirarGalletas(int cantidad) {
-        int retiradas;
+        int retiradas = 0;
         lock.lock();
         try {
-            // Caluclar retiradas para que no salga negativo
-            if (cantidad > capacidad_actual) {
-                retiradas = capacidad_actual;
-                capacidad_actual = 0;
-            } else {
-                retiradas = cantidad;
-                capacidad_actual -= cantidad;
+            if (isHorneadas()){
+                // Caluclar retiradas para que no salga negativo
+                if (cantidad > capacidad_actual) {
+                    retiradas = capacidad_actual;
+                    capacidad_actual = 0;
+                } else {
+                    retiradas = cantidad;
+                    capacidad_actual -= cantidad;
 
+                }
+
+                // Logger + signal de lock
+                String mensaje = " Se han retirado " + retiradas + " galletas.";
+
+                if (capacidad_actual == 0) {
+                    mensaje += " El horno está vacío.";
+                    vacio.signal(); // Señalar que el horno está vacío
+                } else {
+                    mensaje += " Galletas restantes: " + capacidad_actual;
+                }
+
+                logger.add(ID, mensaje);
             }
-
-            // Logger + signal de lock
-            String mensaje = " Se han retirado " + retiradas + " galletas.";
-            if (capacidad_actual == 0) {
-                mensaje += " El horno está vacío.";
-                vacio.signal(); // Señalar que el horno está vacío
-            } else {
-                mensaje += " Galletas restantes: " + capacidad_actual;
-            }
-
-            logger.add(ID, mensaje);
-
         } finally {
             lock.unlock();
         }
@@ -149,6 +152,13 @@ public class Horno extends Thread {
         return capacidad_actual;
     }
 
+    public boolean isHorneadas() {
+        return horneadas;
+    }
+    
+    public void setHorneadas(boolean horneadas) {
+        this.horneadas = horneadas;
+    }
     /*
             OBJ: Ciclo principal del propio hilo, bloqueo de lock para esperar 
                  horneado y para esperar retirada completa
@@ -165,6 +175,7 @@ public class Horno extends Thread {
             try {
                 // A espera de signal que horno este lleno (agregarGalletas)
                 while (capacidad_actual < capacidadMAX) {
+                    setHorneadas(false);
                     logger.add(ID, " Esperando a llenarse. Galletas actuales: " + capacidad_actual);
                     lleno.await();
                 }
@@ -175,6 +186,7 @@ public class Horno extends Thread {
                 Thread.sleep(DURACION_HORNEO);
                 logger.add(ID, " Horneado completado.");
                 setHorneando(false);
+                setHorneadas(true);
 
                 //  A espera de signal que horno este vacio (retirarGalletas)
                 while (capacidad_actual > 0) {

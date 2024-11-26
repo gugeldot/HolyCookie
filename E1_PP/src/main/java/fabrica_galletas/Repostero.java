@@ -62,7 +62,9 @@ public class Repostero extends Thread {
      */
     private boolean todosLlenos() {
         for (Horno horno : arrayDeHornos) {
-            if (!horno.estaLleno()) {
+            
+            System.out.println(horno.getID() + ", horneadas: " + horno.isHorneadas());
+            if (!horno.estaLleno() && !horno.isHorneadas()) {    
                 return false;
             }
         }
@@ -80,11 +82,11 @@ public class Repostero extends Thread {
         while (todosLlenos()) {
             situacion = "Esperando";
             logger.add(ID, "Todos los hornos llenos. Esperando...");
-            Thread.sleep(Utilidades.numeroRandom(1500, 2000));
+            Thread.sleep(Utilidades.numeroRandom(1000, 1500));
         }
 
         for (Horno horno : arrayDeHornos) {
-            if (!horno.estaLleno()) {
+            if (!horno.estaLleno() && !horno.isHorneadas()) {
                 setGalletasDesperdiciadas(horno.agregarGalletas(galletas));
                 logger.add(ID, galletas + " colocadas en " + horno.getID());
                 break;
