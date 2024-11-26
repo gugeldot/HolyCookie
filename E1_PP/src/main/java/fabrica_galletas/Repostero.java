@@ -100,11 +100,13 @@ public class Repostero extends Thread {
         POST: Incrementa el contador de galletas producidas y tandas realizadas.
      */
     public void producirGalletas() throws InterruptedException {
+        tandasProducidas++;
+        situacion = "Produciendo ("+ tandasProducidas+ "/" + tandas +")"; 
         Thread.sleep(Utilidades.numeroRandom(2000, 4000)); // Simula entre 2 y 4 segundos de producción
-
+        
         int galletas = Utilidades.numeroRandom(37, 45); // Genera entre 37 y 45 galletas
         galletasProducidas += galletas;
-        tandasProducidas++;
+        
         logger.add(ID, " produjo " + galletas + " galletas. Total producidas: " + galletasProducidas);
     }
 
@@ -114,6 +116,7 @@ public class Repostero extends Thread {
         POST: Las galletas producidas se depositan en un horno y el contador se reinicia.
      */
     public synchronized void depositarEnHorno() throws InterruptedException {
+        situacion = "Depositando";
         logger.add(ID, " intentar depositar " + galletasProducidas + " galletas.");
         introducirGalletas(galletasProducidas);
         galletasProducidas = 0; // Resetea la cantidad tras depositar
@@ -126,6 +129,7 @@ public class Repostero extends Thread {
      */
     public void descansar() throws InterruptedException {
         descansando = true;
+        situacion = "Descansando";
         logger.add(ID, " está descansando.");
         cafeteria.usarCafetera(ID);
         Thread.sleep(Utilidades.numeroRandom(3000, 6000)); // Descanso entre 3 y 6 segundos

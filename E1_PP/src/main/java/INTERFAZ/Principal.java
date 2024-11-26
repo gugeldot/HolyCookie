@@ -40,7 +40,6 @@ public String getEstadoCafetera2() {
 }
 
 
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -706,6 +705,13 @@ public String getEstadoCafetera2() {
         while (true) {
             estado_cafetera.setText(cafe.getIdOcupado());
             estado_cafetera2.setText(getEstadoCafetera2());
+            
+            estado_repostero.setText(reposteros[0].getSituacion());
+            estado_repostero2.setText(reposteros[1].getSituacion());
+            estado_repostero3.setText(reposteros[2].getSituacion());
+            estado_repostero4.setText(reposteros[3].getSituacion());
+            estado_repostero5.setText(reposteros[4].getSituacion());
+            
             numero_galletas.setText(String.valueOf(hornos[0].getCapacidad_actual()));
             numero_galletas2.setText(String.valueOf(hornos[1].getCapacidad_actual()));
             numero_galletas3.setText(String.valueOf(hornos[2].getCapacidad_actual()));
