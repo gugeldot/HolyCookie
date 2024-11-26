@@ -4,7 +4,6 @@ package fabrica_galletas;
  *
  * @author David Serrano
  */
-
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import misc.Utilidades;
@@ -15,18 +14,34 @@ public class Repostero extends Thread {
     private String ID;
     private int galletasProducidas = 0;
     private int galletasDesperdiciadas = 0;
-   
+
     private int tandasProducidas = 0;
-    
+
     private boolean descansando = false;
-    private String situacion ;
-    
+    private String situacion;
+
     private Logger logger;
     private Cafeteria cafeteria;
     private Horno[] arrayDeHornos;
     private int tandas = 0;
-    
+
     private final Lock lock = new ReentrantLock();
+
+    public int getTandasProducidas() {
+        return tandasProducidas;
+    }
+
+    public String getSituacion() {
+        return situacion;
+    }
+
+    public int getTandas() {
+        return tandas;
+    }
+
+    public String getID() {
+        return ID;
+    }
 
     public Repostero(String ID, Horno[] arrayDeHornos, Cafeteria cafeteria, Logger logger) {
         this.ID = ID;
@@ -34,6 +49,10 @@ public class Repostero extends Thread {
         this.arrayDeHornos = arrayDeHornos;
         this.cafeteria = cafeteria;
         situacion = "Iniciado";
+    }
+
+    public boolean isDescansando() {
+        return descansando;
     }
 
     /*
@@ -65,7 +84,7 @@ public class Repostero extends Thread {
         }
 
         for (Horno horno : arrayDeHornos) {
-            if (!horno.estaLleno()) { 
+            if (!horno.estaLleno()) {
                 setGalletasDesperdiciadas(horno.agregarGalletas(galletas));
                 logger.add(ID, galletas + " colocadas en " + horno.getID());
                 break;
@@ -106,10 +125,12 @@ public class Repostero extends Thread {
         POST: El hilo descansa durante un tiempo aleatorio antes de retomar la producción.
      */
     public void descansar() throws InterruptedException {
+        descansando = true;
         logger.add(ID, " está descansando.");
         cafeteria.usarCafetera(ID);
         Thread.sleep(Utilidades.numeroRandom(3000, 6000)); // Descanso entre 3 y 6 segundos
         logger.add(ID, " terminó de descansar.");
+        descansando = false;
     }
 
     /*
@@ -136,11 +157,9 @@ public class Repostero extends Thread {
         }
     }
 
-    
     public void setGalletasDesperdiciadas(int galletasDesperdiciadas) {
         this.galletasDesperdiciadas = galletasDesperdiciadas;
     }
-
 
     public int getGalletasDesperdiciadas() {
         return galletasDesperdiciadas;
