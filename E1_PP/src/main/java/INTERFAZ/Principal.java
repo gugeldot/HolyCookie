@@ -1,23 +1,45 @@
 package INTERFAZ;
 
-import fabrica_galletas.Horno;
+import fabrica_galletas.*;
 
 /**
  *
  * @author Gugeldot
  */
-
 public class Principal extends javax.swing.JFrame implements Runnable {
-    
+
     Horno[] hornos;
-    public Principal(Horno[] hornos) {
+    Cafeteria cafe;
+    Repostero[] reposteros;
+
+    public Principal(Cafeteria cafe, Repostero[] reposteros, Horno[] hornos) {
         initComponents();
         setLocationRelativeTo(null); // Centra la ventana en la pantalla
         setTitle("Fabrica Galletas -- Menu Principal "); // Asigna el título de la ventana
-    
+
+        this.cafe = cafe;
         this.hornos = hornos;
-    
+        this.reposteros = reposteros;
+
     }
+
+public String getEstadoCafetera2() {
+    String resultado = " ";
+    for (Repostero rep : reposteros) {
+        if (rep.isDescansando() && !rep.getID().equals(cafe.getIdOcupado())) {
+            resultado += rep.getID() + ", ";
+        }
+    }
+
+    // Eliminar la última coma y espacio si la longitud es mayor que 1
+    if (resultado.length() > 1) {
+        resultado = resultado.substring(0, resultado.length() - 2);
+    }
+
+    return resultado;
+}
+
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -76,6 +98,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         tanda4_emp3 = new javax.swing.JLabel();
         tanda5_emp3 = new javax.swing.JLabel();
         botonComer = new javax.swing.JToggleButton();
+        Label_cafetera1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -177,7 +200,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
 
         estado_cafetera2.setBackground(new java.awt.Color(255, 255, 255));
         estado_cafetera2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        estado_cafetera2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        estado_cafetera2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         estado_cafetera2.setText("<ESTADO>");
         estado_cafetera2.setToolTipText("");
         estado_cafetera2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -429,6 +452,10 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             }
         });
 
+        Label_cafetera1.setBackground(new java.awt.Color(0, 0, 0));
+        Label_cafetera1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        Label_cafetera1.setText("Descansando");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -457,9 +484,6 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(Label_cafetera, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -537,10 +561,6 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(estado_cafetera, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(estado_cafetera2, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(Label_repostero1, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
                                     .addComponent(estado_repostero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -559,14 +579,24 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(Label_repostero5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(estado_repostero5, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(estado_repostero5, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(estado_cafetera, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Label_cafetera, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Label_cafetera1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(estado_cafetera2, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(Label_cafetera, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Label_cafetera, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Label_cafetera1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(estado_cafetera)
@@ -673,22 +703,24 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_botonComerActionPerformed
 
     public void run() {
-        while (true){
-            numero_galletas.setText(String.valueOf(hornos[0].getCapacidad_actual())); 
-            numero_galletas2.setText(String.valueOf(hornos[1].getCapacidad_actual())); 
-            numero_galletas3.setText(String.valueOf(hornos[2].getCapacidad_actual())); 
-            
+        while (true) {
+            estado_cafetera.setText(cafe.getIdOcupado());
+            estado_cafetera2.setText(getEstadoCafetera2());
+            numero_galletas.setText(String.valueOf(hornos[0].getCapacidad_actual()));
+            numero_galletas2.setText(String.valueOf(hornos[1].getCapacidad_actual()));
+            numero_galletas3.setText(String.valueOf(hornos[2].getCapacidad_actual()));
+
             estado_horno.setText(String.valueOf(hornos[0].isHorneando()));
             estado_horno2.setText(String.valueOf(hornos[1].isHorneando()));
             estado_horno3.setText(String.valueOf(hornos[2].isHorneando()));
         }
     }
 
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Label_almacen;
     private javax.swing.JLabel Label_cafetera;
+    private javax.swing.JLabel Label_cafetera1;
     private javax.swing.JLabel Label_emp;
     private javax.swing.JLabel Label_emp2;
     private javax.swing.JLabel Label_emp3;

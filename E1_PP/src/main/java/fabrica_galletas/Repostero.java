@@ -24,6 +24,15 @@ public class Repostero extends Thread {
 
     private final Lock lock = new ReentrantLock();
 
+    public String getID() {
+        return ID;
+    }
+
+    
+    public boolean isDescansando() {
+        return descansando;
+    }
+
     public Repostero(String ID, Horno[] arrayDeHornos, Cafeteria cafeteria, Logger logger) {
         this.ID = ID;
         this.logger = logger;
@@ -100,10 +109,12 @@ public class Repostero extends Thread {
         POST: El hilo descansa durante un tiempo aleatorio antes de retomar la producción.
      */
     public void descansar() throws InterruptedException {
+        descansando = true;
         logger.add(ID, " está descansando.");
         cafeteria.usarCafetera(ID);
         Thread.sleep(Utilidades.numeroRandom(3000, 6000)); // Descanso entre 3 y 6 segundos
         logger.add(ID, " terminó de descansar.");
+        descansando = false;
     }
 
     /*
