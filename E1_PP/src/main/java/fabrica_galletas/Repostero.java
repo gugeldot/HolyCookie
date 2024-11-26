@@ -62,8 +62,6 @@ public class Repostero extends Thread {
      */
     private boolean todosLlenos() {
         for (Horno horno : arrayDeHornos) {
-            
-            System.out.println(horno.getID() + ", horneadas: " + horno.isHorneadas());
             if (!horno.estaLleno() && !horno.isHorneadas()) {    
                 return false;
             }
