@@ -12,8 +12,9 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     Cafeteria cafe;
     Repostero[] reposteros;
     Almacen almacen;
+    Empaquetador[] empaquetadores;
     
-    public Principal(Cafeteria cafe, Repostero[] reposteros, Horno[] hornos, Almacen almacen) {
+    public Principal(Cafeteria cafe, Repostero[] reposteros, Horno[] hornos,Empaquetador[] empaquetadores, Almacen almacen) {
         initComponents();
         setLocationRelativeTo(null); // Centra la ventana en la pantalla
         setTitle("Fabrica Galletas -- Menu Principal "); // Asigna el título de la ventana
@@ -22,7 +23,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         this.hornos = hornos;
         this.reposteros = reposteros;
         this.almacen = almacen;
-
+        this.empaquetadores = empaquetadores;
     }
 
 public String getEstadoCafetera2() {
@@ -716,10 +717,14 @@ public String getEstadoCafetera2() {
             numero_galletas.setText(String.valueOf(hornos[0].getCapacidad_actual()));
             numero_galletas2.setText(String.valueOf(hornos[1].getCapacidad_actual()));
             numero_galletas3.setText(String.valueOf(hornos[2].getCapacidad_actual()));
-
+            
             estado_horno.setText(String.valueOf(hornos[0].isHorneando()));
             estado_horno2.setText(String.valueOf(hornos[1].isHorneando()));
             estado_horno3.setText(String.valueOf(hornos[2].isHorneando()));
+            
+            estado_emp.setText(empaquetadores[0].getEstado());
+            estado_emp2.setText(empaquetadores[1].getEstado());
+            estado_emp3.setText(empaquetadores[2].getEstado());
             
             estado_almacen.setText(String.valueOf(almacen.getCapacidad_actual()));
         }
