@@ -817,6 +817,9 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             tanda5_emp3.setBackground(colorTandaEmpaquetador(2, 5));
 
             estado_almacen.setText(String.valueOf(almacen.getCapacidad_actual()));
+            
+            // Descanso minimo para no saturar memoria
+            try {Thread.sleep(100);} catch (InterruptedException ex) {System.out.println(ex);}
         }
     }
 
