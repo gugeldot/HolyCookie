@@ -2,6 +2,12 @@ package INTERFAZ;
 
 import fabrica_galletas.*;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JProgressBar;
+import javax.swing.Timer;
 
 /**
  *
@@ -54,6 +60,81 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         }
     }
 
+    // Variable para almacenar los hilos de animación de cada barra
+    // Si no se crean la interfaz (hilo principal se congela) 
+    private Thread hiloAnimacionBarraH1 = null;
+    private Thread hiloAnimacionBarraH2 = null;
+    private Thread hiloAnimacionBarraH3 = null;
+
+    public void animacionBarra(JProgressBar barra, Horno horno, int hornoIndex) {
+        // Verificar si ya existe un hilo para esta barra, y si no, crear uno nuevo
+        if (horno.isHorneando()) {
+            // Comprobar si el hilo ya está en ejecución para no creear uno nuevo 
+            if ((hornoIndex == 0 && hiloAnimacionBarraH1 == null)
+                    || (hornoIndex == 1 && hiloAnimacionBarraH2 == null)
+                    || (hornoIndex == 2 && hiloAnimacionBarraH3 == null)) {
+
+                // Crear el hilo solo si no está en ejecución
+                Thread animacionThread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            // Tiempo total de la animación (8 segundos)
+                            int tiempoTotal = 8000;  // 8 segundos = 8000 milisegundos
+                            int unidadesPorAvance = 1;  // Aumentar la barra en 1 unidad por vez
+                            int totalAvances = 100 / unidadesPorAvance;  // Número de avances (100 avances)
+
+                            // Configurar la barra para que empiece en 0
+                            barra.setValue(0);
+                            barra.setForeground(Color.red);
+
+                            // Ciclo para actualizar la barra de progreso
+                            for (int i = 0; i <= 100; i += unidadesPorAvance) {
+                                barra.setValue(i);  // Actualiza el valor de la barra
+                                Thread.sleep(tiempoTotal / totalAvances);  // Espera para cada avance (400 ms)
+                            }
+                        } catch (InterruptedException ex) {
+                            ex.printStackTrace();
+                        } finally {
+                            // Al terminar, liberamos el hilo para que se pueda crear uno nuevo la próxima vez
+                            if (hornoIndex == 0) {
+                                hiloAnimacionBarraH1 = null;
+                            }
+                            if (hornoIndex == 1) {
+                                hiloAnimacionBarraH2 = null;
+                            }
+                            if (hornoIndex == 2) {
+                                hiloAnimacionBarraH3 = null;
+                            }
+                        }
+                    }
+                });
+
+                // Iniciar el hilo de animación
+                if (hornoIndex == 0) {
+                    hiloAnimacionBarraH1 = animacionThread;
+                }
+                if (hornoIndex == 1) {
+                    hiloAnimacionBarraH2 = animacionThread;
+                }
+                if (hornoIndex == 2) {
+                    hiloAnimacionBarraH3 = animacionThread;
+                }
+
+                animacionThread.start();
+            }
+        } else if (horno.isHorneadas()) {
+            // Si el horno ha terminado, llenamos la barra
+            barra.setValue(100);  // La barra se llena
+            barra.setForeground(Color.green);
+        }
+        else if (!horno.isHorneadas() && !horno.isHorneando()){
+            // Se  vacia si esta cargandose 
+            barra.setValue(0);  // La barra se llena
+            
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -92,9 +173,6 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         estado_emp3 = new javax.swing.JLabel();
         Label_almacen = new javax.swing.JLabel();
         estado_almacen = new javax.swing.JLabel();
-        estado_horno = new javax.swing.JLabel();
-        estado_horno2 = new javax.swing.JLabel();
-        estado_horno3 = new javax.swing.JLabel();
         tanda1_emp1 = new javax.swing.JLabel();
         tanda2_emp1 = new javax.swing.JLabel();
         tanda3_emp1 = new javax.swing.JLabel();
@@ -112,6 +190,9 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         tanda5_emp3 = new javax.swing.JLabel();
         Label_cafetera1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        barraH1 = new javax.swing.JProgressBar();
+        barraH2 = new javax.swing.JProgressBar();
+        barraH3 = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -325,30 +406,6 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         estado_almacen.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         estado_almacen.setOpaque(true);
 
-        estado_horno.setBackground(new java.awt.Color(255, 255, 255));
-        estado_horno.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        estado_horno.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        estado_horno.setText("BARRA");
-        estado_horno.setToolTipText("");
-        estado_horno.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        estado_horno.setOpaque(true);
-
-        estado_horno2.setBackground(new java.awt.Color(255, 255, 255));
-        estado_horno2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        estado_horno2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        estado_horno2.setText("BARRA");
-        estado_horno2.setToolTipText("");
-        estado_horno2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        estado_horno2.setOpaque(true);
-
-        estado_horno3.setBackground(new java.awt.Color(255, 255, 255));
-        estado_horno3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        estado_horno3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        estado_horno3.setText("BARRA");
-        estado_horno3.setToolTipText("");
-        estado_horno3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        estado_horno3.setOpaque(true);
-
         tanda1_emp1.setBackground(new java.awt.Color(255, 255, 255));
         tanda1_emp1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         tanda1_emp1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -468,21 +525,20 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             }
         });
 
+        barraH1.setForeground(new java.awt.Color(255, 51, 51));
+
+        barraH2.setForeground(new java.awt.Color(255, 51, 51));
+
+        barraH3.setForeground(new java.awt.Color(255, 51, 51));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(123, 123, 123)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(estado_horno, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Label_emp))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(estado_emp, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(tanda1_emp1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tanda2_emp1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -491,7 +547,11 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tanda4_emp1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tanda5_emp1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(tanda5_emp1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(barraH1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(estado_emp, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Label_emp)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
@@ -504,7 +564,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(148, 148, 148)
                                 .addComponent(Label_horno1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(tanda1_emp3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -530,13 +590,13 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                                         .addComponent(tanda5_emp2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(estado_almacen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(estado_horno2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(Label_emp2)
                                         .addComponent(estado_emp2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(Label_horno2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                             .addGap(6, 6, 6)
-                                            .addComponent(Label_numGalletas2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(Label_numGalletas2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(barraH2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(Label_almacen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(174, 174, 174)
@@ -544,11 +604,12 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(Label_emp3)
                                         .addComponent(estado_emp3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(estado_horno3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                             .addGap(8, 8, 8)
                                             .addComponent(Label_numGalletas3, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(Label_horno3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(Label_horno3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Label_horneando3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(barraH3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(121, 121, 121))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -558,18 +619,14 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(141, 141, 141)
                                 .addComponent(numero_galletas, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Label_horneando2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(numero_galletas2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(numero_galletas2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(250, 250, 250)
                                 .addComponent(numero_galletas3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(230, 230, 230)
-                                .addComponent(Label_horneando3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(141, Short.MAX_VALUE))
+                            .addComponent(Label_horneando2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(155, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -655,45 +712,49 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                     .addComponent(Label_horneando2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Label_horneando3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Label_horneando, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(estado_horno)
-                    .addComponent(estado_horno2)
-                    .addComponent(estado_horno3))
-                .addGap(5, 5, 5)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Label_emp3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Label_emp2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Label_emp, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(estado_emp)
-                    .addComponent(estado_emp2)
-                    .addComponent(estado_emp3))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tanda1_emp1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tanda2_emp1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tanda3_emp1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tanda4_emp1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tanda5_emp1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tanda1_emp3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tanda2_emp3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tanda3_emp3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tanda4_emp3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tanda5_emp3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tanda3_emp2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tanda4_emp2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tanda5_emp2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tanda2_emp2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tanda1_emp2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(Label_almacen, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(estado_almacen, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(85, 85, 85))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(barraH1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(barraH3, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Label_emp3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Label_emp2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Label_emp, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(estado_emp)
+                            .addComponent(estado_emp2)
+                            .addComponent(estado_emp3))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tanda1_emp1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tanda2_emp1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tanda3_emp1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tanda4_emp1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tanda5_emp1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tanda1_emp3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tanda2_emp3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tanda3_emp3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tanda4_emp3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tanda5_emp3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tanda3_emp2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tanda4_emp2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tanda5_emp2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tanda2_emp2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tanda1_emp2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(Label_almacen, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(estado_almacen, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(9, 9, 9)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(85, 85, 85))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(barraH2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -729,9 +790,9 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             numero_galletas2.setText(String.valueOf(hornos[1].getCapacidad_actual()));
             numero_galletas3.setText(String.valueOf(hornos[2].getCapacidad_actual()));
 
-            estado_horno.setText(String.valueOf(hornos[0].isHorneando()));
-            estado_horno2.setText(String.valueOf(hornos[1].isHorneando()));
-            estado_horno3.setText(String.valueOf(hornos[2].isHorneando()));
+            animacionBarra(barraH1, hornos[0], 0);
+            animacionBarra(barraH2, hornos[1], 1);
+            animacionBarra(barraH3, hornos[2], 2);
 
             estado_emp.setText(empaquetadores[0].getEstado());
             estado_emp2.setText(empaquetadores[1].getEstado());
@@ -756,6 +817,9 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             tanda5_emp3.setBackground(colorTandaEmpaquetador(2, 5));
 
             estado_almacen.setText(String.valueOf(almacen.getCapacidad_actual()));
+            
+            // Descanso minimo para no saturar memoria
+            try {Thread.sleep(100);} catch (InterruptedException ex) {System.out.println(ex);}
         }
     }
 
@@ -781,15 +845,15 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     private javax.swing.JLabel Label_repostero3;
     private javax.swing.JLabel Label_repostero4;
     private javax.swing.JLabel Label_repostero5;
+    private javax.swing.JProgressBar barraH1;
+    private javax.swing.JProgressBar barraH2;
+    private javax.swing.JProgressBar barraH3;
     private javax.swing.JLabel estado_almacen;
     private javax.swing.JLabel estado_cafetera;
     private javax.swing.JLabel estado_cafetera2;
     private javax.swing.JLabel estado_emp;
     private javax.swing.JLabel estado_emp2;
     private javax.swing.JLabel estado_emp3;
-    private javax.swing.JLabel estado_horno;
-    private javax.swing.JLabel estado_horno2;
-    private javax.swing.JLabel estado_horno3;
     private javax.swing.JLabel estado_repostero;
     private javax.swing.JLabel estado_repostero2;
     private javax.swing.JLabel estado_repostero3;
