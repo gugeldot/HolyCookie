@@ -52,8 +52,9 @@ public class Principal extends javax.swing.JFrame implements Runnable {
 // Retorna color de las casillas del estado empaquetador
     public Color colorTandaEmpaquetador(int indice, int pos) {
         // Se puede quitar si se quiere que cuando transporte se quede en rojo
+        boolean blankLlenado = !hornos[indice].isHorneando();
         boolean blankTransporte = true; //!empaquetadores[indice].getEstado().equals("Transportando");
-        if (empaquetadores[indice].getTanda() >= pos && blankTransporte) {
+        if (empaquetadores[indice].getTanda() >= pos && blankLlenado && blankTransporte) {
             return Color.red;
         } else {
             return Color.white;
@@ -517,7 +518,6 @@ public class Principal extends javax.swing.JFrame implements Runnable {
 
         jButton1.setBackground(new java.awt.Color(204, 204, 204));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("COMER");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
