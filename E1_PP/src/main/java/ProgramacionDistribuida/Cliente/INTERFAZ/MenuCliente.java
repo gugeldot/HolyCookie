@@ -47,11 +47,16 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
         estado_repostero12 = new javax.swing.JLabel();
         estado_repostero13 = new javax.swing.JLabel();
         estado_repostero14 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(500, 700));
-        setMinimumSize(new java.awt.Dimension(500, 700));
-        setPreferredSize(new java.awt.Dimension(500, 700));
+        setMaximumSize(new java.awt.Dimension(600, 700));
+        setMinimumSize(new java.awt.Dimension(600, 700));
+        setPreferredSize(new java.awt.Dimension(600, 700));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -122,13 +127,13 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
         Label_numGalletas2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         Label_numGalletas2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         Label_numGalletas2.setText("Galletas horneadas");
-        jPanel1.add(Label_numGalletas2, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 266, -1, 36));
+        jPanel1.add(Label_numGalletas2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, -1, 36));
 
         Label_numGalletas3.setBackground(new java.awt.Color(0, 0, 0));
         Label_numGalletas3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         Label_numGalletas3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         Label_numGalletas3.setText("Horneando");
-        jPanel1.add(Label_numGalletas3, new org.netbeans.lib.awtextra.AbsoluteConstraints(295, 266, -1, 36));
+        jPanel1.add(Label_numGalletas3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 270, -1, 36));
 
         Label_numGalletas4.setBackground(new java.awt.Color(0, 0, 0));
         Label_numGalletas4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -286,6 +291,61 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
         estado_repostero14.setOpaque(true);
         jPanel1.add(estado_repostero14, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 530, 140, -1));
 
+        jButton1.setBackground(new java.awt.Color(204, 204, 204));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton1.setText("PARAR");
+        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, 60, 20));
+
+        jButton2.setBackground(new java.awt.Color(204, 204, 204));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton2.setText("PARAR");
+        jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 60, 60, 20));
+
+        jButton3.setBackground(new java.awt.Color(204, 204, 204));
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton3.setText("PARAR");
+        jButton3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 100, 60, 20));
+
+        jButton4.setBackground(new java.awt.Color(204, 204, 204));
+        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton4.setText("PARAR");
+        jButton4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 140, 60, 20));
+
+        jButton5.setBackground(new java.awt.Color(204, 204, 204));
+        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton5.setText("PARAR");
+        jButton5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 180, 60, 20));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -294,14 +354,31 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(29, 29, 29))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     public static void main(String args[]) {
         
@@ -352,6 +429,11 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
     private javax.swing.JLabel estado_repostero7;
     private javax.swing.JLabel estado_repostero8;
     private javax.swing.JLabel estado_repostero9;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
