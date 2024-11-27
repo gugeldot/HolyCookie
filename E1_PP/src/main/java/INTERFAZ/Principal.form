@@ -96,7 +96,7 @@
                                   <Component id="Label_horno1" min="-2" pref="115" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="127" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="102" attributes="0">
                                   <Component id="tanda1_emp3" min="-2" pref="25" max="-2" attributes="0"/>
@@ -124,7 +124,6 @@
                                       </Group>
                                       <Component id="estado_almacen" alignment="0" max="32767" attributes="0"/>
                                       <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                          <Component id="estado_horno2" min="-2" pref="144" max="-2" attributes="0"/>
                                           <Component id="Label_emp2" min="-2" max="-2" attributes="0"/>
                                           <Component id="estado_emp2" alignment="0" min="-2" pref="144" max="-2" attributes="0"/>
                                           <Component id="Label_horno2" alignment="0" min="-2" pref="126" max="-2" attributes="0"/>
@@ -132,6 +131,7 @@
                                               <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                                               <Component id="Label_numGalletas2" min="-2" pref="126" max="-2" attributes="0"/>
                                           </Group>
+                                          <Component id="barraH2" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="Label_almacen" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jButton1" alignment="0" max="32767" attributes="0"/>
@@ -141,7 +141,6 @@
                                       <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                                           <Component id="Label_emp3" min="-2" max="-2" attributes="0"/>
                                           <Component id="estado_emp3" min="-2" pref="144" max="-2" attributes="0"/>
-                                          <Component id="estado_horno3" min="-2" pref="144" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                                               <Component id="Label_numGalletas3" min="-2" pref="126" max="-2" attributes="0"/>
@@ -149,6 +148,7 @@
                                       </Group>
                                       <Component id="Label_horno3" alignment="1" min="-2" pref="112" max="-2" attributes="0"/>
                                       <Component id="Label_horneando3" alignment="1" min="-2" pref="110" max="-2" attributes="0"/>
+                                      <Component id="barraH3" min="-2" pref="140" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -290,49 +290,54 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="estado_horno2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="estado_horno3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="barraH1" min="-2" pref="17" max="-2" attributes="0"/>
+                              <Component id="barraH3" alignment="0" min="-2" pref="17" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="Label_emp3" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                              <Component id="Label_emp2" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                              <Component id="Label_emp" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="estado_emp" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="estado_emp2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="estado_emp3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="tanda1_emp1" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="tanda2_emp1" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="tanda3_emp1" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="tanda4_emp1" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="tanda5_emp1" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="tanda1_emp3" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="tanda2_emp3" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="tanda3_emp3" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="tanda4_emp3" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="tanda5_emp3" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="tanda3_emp2" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="tanda4_emp2" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="tanda5_emp2" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="tanda2_emp2" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="tanda1_emp2" min="-2" pref="25" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="32767" attributes="0"/>
+                          <Component id="Label_almacen" min="-2" pref="36" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="estado_almacen" min="-2" pref="42" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                          <Component id="jButton1" min="-2" pref="17" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="barraH1" alignment="0" min="-2" pref="17" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="barraH2" min="-2" pref="17" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="Label_emp3" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                      <Component id="Label_emp2" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                      <Component id="Label_emp" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="estado_emp" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="estado_emp2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="estado_emp3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="tanda1_emp1" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="tanda2_emp1" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="tanda3_emp1" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="tanda4_emp1" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="tanda5_emp1" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="tanda1_emp3" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="tanda2_emp3" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="tanda3_emp3" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="tanda4_emp3" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="tanda5_emp3" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="tanda3_emp2" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="tanda4_emp2" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="tanda5_emp2" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="tanda2_emp2" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="tanda1_emp2" min="-2" pref="25" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="32767" attributes="0"/>
-                  <Component id="Label_almacen" min="-2" pref="36" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="estado_almacen" min="-2" pref="42" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                  <Component id="jButton1" min="-2" pref="17" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -826,44 +831,6 @@
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="estado_horno2">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="14" style="1"/>
-            </Property>
-            <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="BARRA"/>
-            <Property name="toolTipText" type="java.lang.String" value=""/>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                <LineBorder/>
-              </Border>
-            </Property>
-            <Property name="opaque" type="boolean" value="true"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="estado_horno3">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="14" style="1"/>
-            </Property>
-            <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="BARRA"/>
-            <Property name="toolTipText" type="java.lang.String" value=""/>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                <LineBorder/>
-              </Border>
-            </Property>
-            <Property name="opaque" type="boolean" value="true"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="tanda1_emp1">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -1163,6 +1130,20 @@
           </Events>
         </Component>
         <Component class="javax.swing.JProgressBar" name="barraH1">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="33" red="ff" type="rgb"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JProgressBar" name="barraH2">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="33" red="ff" type="rgb"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JProgressBar" name="barraH3">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="33" red="ff" type="rgb"/>
