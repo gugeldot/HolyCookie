@@ -1,6 +1,10 @@
-package ProgramacionConcurrente.INTERFAZ;
+package Server.GUI;
 
-import ProgramacionConcurrente.fabrica_galletas.*;
+import Server.fabrica_galletas.Empaquetador;
+import Server.fabrica_galletas.Cafeteria;
+import Server.fabrica_galletas.Horno;
+import Server.fabrica_galletas.Repostero;
+import Server.fabrica_galletas.Almacen;
 import java.awt.Color;
 import javax.swing.JProgressBar;
 
@@ -195,7 +199,6 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setForeground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(1000, 800));
         setResizable(false);
         setSize(new java.awt.Dimension(1000, 800));
 
@@ -761,7 +764,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 701, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 701, Short.MAX_VALUE)
         );
 
         pack();

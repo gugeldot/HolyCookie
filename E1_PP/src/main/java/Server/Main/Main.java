@@ -1,11 +1,18 @@
-package ProgramacionConcurrente.mainRun;
+package Server.Main;
 
-import ProgramacionConcurrente.misc.Logger;
-import ProgramacionConcurrente.fabrica_galletas.*;
-import ProgramacionConcurrente.INTERFAZ.Principal;
+import Server.fabrica_galletas.Empaquetador;
+import Server.fabrica_galletas.Cafeteria;
+import Server.fabrica_galletas.Horno;
+import Server.fabrica_galletas.Repostero;
+import Server.fabrica_galletas.Almacen;
+import Server.misc.Logger;
+import Server.GUI.Principal;
+import java.rmi.Naming;
+import java.rmi.registry.LocateRegistry;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
+        
         final int MAX_GALLETAS_HORNO = 200;
         final int NUMERO_REPOSTEROS = 5;
         
@@ -41,6 +48,23 @@ public class Main {
         principal.setVisible(true);
         Thread thread = new Thread(principal); // Pasar Principal como Runnable a un Thread
         thread.start(); // Inicia el hilo, llamando al método run
+        
+        
+        //PARTE DE RMI SERVIDOR
+        try {
+            // Crear el objeto remoto
+            FabricaGalletasImpl fabrica = new FabricaGalletasImpl(almacen); 
+
+            // Crear un registro RMI en el puerto 1099 (puerto predeterminado)
+            LocateRegistry.createRegistry(1099);
+
+            // Registrar el objeto en el registro RMI bajo el nombre "Servicio"
+            Naming.rebind("//localhost/fabrica", fabrica);
+
+            System.out.println("Servidor RMI listo...");
+        } catch (Exception e) {
+            System.out.println("Error en el servidor RMI: " + e.getMessage());
+        }
       
     }
 }

@@ -1,4 +1,4 @@
-package ProgramacionConcurrente.fabrica_galletas;
+package Server.fabrica_galletas;
 
 /**
  *
@@ -6,8 +6,8 @@ package ProgramacionConcurrente.fabrica_galletas;
  */
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-import ProgramacionConcurrente.misc.Utilidades;
-import ProgramacionConcurrente.misc.Logger;
+import Server.misc.Utilidades;
+import Server.misc.Logger;
 
 public class Repostero extends Thread {
 

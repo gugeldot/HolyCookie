@@ -1,11 +1,17 @@
-package ProgramacionDistribuida.Cliente.INTERFAZ;
+package ClienteRMI.GUI;
+
+import RMI.FabricaGalletasRemote;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MenuCliente extends javax.swing.JFrame implements Runnable {
-
-    public MenuCliente() {
+    private FabricaGalletasRemote fabrica;
+    public MenuCliente(FabricaGalletasRemote fabrica) {
         initComponents();
         setLocationRelativeTo(null); // Centra la ventana en la pantalla
         setTitle("Fabrica Galletas -- Menu de Cliente Remoto "); // Asigna el título de la ventana
+        this.fabrica = fabrica;
 
     }
 
@@ -54,9 +60,7 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
         jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(600, 700));
         setMinimumSize(new java.awt.Dimension(600, 700));
-        setPreferredSize(new java.awt.Dimension(600, 700));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -350,7 +354,7 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -382,17 +386,22 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
 
     public static void main(String args[]) {
         
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new MenuCliente().setVisible(true);
-            }
-        });
+       
     }
 
     @Override
     public void run() {
-
+        while (true){
+            try {
+                estado_repostero14.setText(String.valueOf(fabrica.getCapacidadAlmacen()));
+                
+                
+            } catch (RemoteException ex) {
+                Logger.getLogger(MenuCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            // Descanso minimo para no saturar memoria
+            try {Thread.sleep(100);} catch (InterruptedException ex) {System.out.println(ex);}
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
