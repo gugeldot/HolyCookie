@@ -1,25 +1,25 @@
 package Server.Main;
-        
-import Server.fabrica_galletas.Almacen;
+
+import Server.fabrica_galletas.*;
 import RMI.FabricaGalletasRemote;
 import java.rmi.server.UnicastRemoteObject;
 import java.rmi.RemoteException;
 
 public class FabricaGalletasImpl extends UnicastRemoteObject implements FabricaGalletasRemote {
 
+    private Repostero[] reposteros;
+    private Horno[] hornos;
     private Almacen almacen;
 
-    public FabricaGalletasImpl(Almacen almacen) throws RemoteException {
+    public FabricaGalletasImpl(Repostero[] reposteros, Horno[] hornos, Almacen almacen) throws RemoteException {
+        this.hornos = hornos;
+        this.reposteros = reposteros;
         this.almacen = almacen;
-    }
-
-    public String getAlmacenNombre() throws RemoteException {
-        return almacen.getID();
     }
 
     public int getCapacidadAlmacen() throws RemoteException {
         return almacen.getCapacidad_actual();
     }
 
-    // Implementa otros métodos según sea necesario
+   
 }
