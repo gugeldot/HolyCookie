@@ -420,9 +420,22 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
                 estado_almacenadasAlm.setText(String.valueOf(fabrica.getCapacidadAlmacen()));
                 estado_consumidasAlm.setText(String.valueOf(fabrica.getGalletasConsumidas()));
                 
+                estado_gen1.setText(String.valueOf(fabrica.getGalletasGeneradas(0)));
+                estado_gen2.setText(String.valueOf(fabrica.getGalletasGeneradas(1)));
+                estado_gen3.setText(String.valueOf(fabrica.getGalletasGeneradas(2)));
+                estado_gen4.setText(String.valueOf(fabrica.getGalletasGeneradas(3)));
+                estado_gen5.setText(String.valueOf(fabrica.getGalletasGeneradas(4)));
+                
+                estado_desperdicio1.setText(String.valueOf(fabrica.getGalletasDesperdiciadas(0)));
+                estado_desperdicio2.setText(String.valueOf(fabrica.getGalletasDesperdiciadas(1)));
+                estado_desperdicio3.setText(String.valueOf(fabrica.getGalletasDesperdiciadas(2)));
+                estado_desperdicio4.setText(String.valueOf(fabrica.getGalletasDesperdiciadas(3)));
+                estado_desperdicio5.setText(String.valueOf(fabrica.getGalletasDesperdiciadas(4)));
+                
                 estado_horno1.setText(String.valueOf(fabrica.getGalletasHorneadas(0)));
                 estado_horno2.setText(String.valueOf(fabrica.getGalletasHorneadas(1)));
                 estado_horno3.setText(String.valueOf(fabrica.getGalletasHorneadas(2)));
+                
                 
                 BarraSimple(barraH1, 0);
                 BarraSimple(barraH2, 1);

@@ -2,10 +2,8 @@ package Server.Main;
 
 import Server.fabrica_galletas.*;
 import RMI.FabricaGalletasRemote;
-import java.awt.Color;
 import java.rmi.server.UnicastRemoteObject;
 import java.rmi.RemoteException;
-import javax.swing.JProgressBar;
 
 public class FabricaGalletasImpl extends UnicastRemoteObject implements FabricaGalletasRemote {
 
@@ -21,11 +19,11 @@ public class FabricaGalletasImpl extends UnicastRemoteObject implements FabricaG
 
     // Reposteros 
     public int getGalletasGeneradas(int indiceRepostero) throws RemoteException {
-        return 0;
+        return reposteros[indiceRepostero].getGalletasProducidas();
     }
 
     public int getGalletasDesperdiciadas(int indiceRepostero) throws RemoteException {
-        return 0;
+        return reposteros[indiceRepostero].getGalletasDesperdiciadas();
     }
 
     public void parar(int indiceRepostero) throws RemoteException {

@@ -13,6 +13,7 @@ public class Repostero extends Thread {
 
     private String ID;
     private int galletasProducidas = 0;
+    private int historicoProducidas = 0;
     private int galletasDesperdiciadas = 0;
 
     private int tandasProducidas = 0;
@@ -62,7 +63,7 @@ public class Repostero extends Thread {
      */
     private boolean todosLlenos() {
         for (Horno horno : arrayDeHornos) {
-            if (!horno.estaLleno() && !horno.isHorneadas()) {    
+            if (!horno.estaLleno() && !horno.isHorneadas()) {
                 return false;
             }
         }
@@ -85,7 +86,8 @@ public class Repostero extends Thread {
 
         for (Horno horno : arrayDeHornos) {
             if (!horno.estaLleno() && !horno.isHorneadas()) {
-                setGalletasDesperdiciadas(horno.agregarGalletas(galletas));
+                galletasDesperdiciadas += horno.agregarGalletas(galletas);
+                
                 logger.add(ID, galletas + " colocadas en " + horno.getID());
                 break;
             } else {
@@ -101,13 +103,14 @@ public class Repostero extends Thread {
      */
     public void producirGalletas() throws InterruptedException {
         tandasProducidas++;
-        situacion = "Produciendo ("+ tandasProducidas+ "/" + tandas +")"; 
+        situacion = "Produciendo (" + tandasProducidas + "/" + tandas + ")";
         Thread.sleep(Utilidades.numeroRandom(2000, 4000)); // Simula entre 2 y 4 segundos de producción
-        
+
         int galletas = Utilidades.numeroRandom(37, 45); // Genera entre 37 y 45 galletas
-        galletasProducidas += galletas;
-        
-        logger.add(ID, " produjo " + galletas + " galletas. Total producidas: " + galletasProducidas);
+        galletasProducidas = galletas;
+        historicoProducidas += galletas;
+
+        logger.add(ID, " Produjo " + galletas + " galletas. Total producidas: " + historicoProducidas);
     }
 
     /*
@@ -117,7 +120,7 @@ public class Repostero extends Thread {
      */
     public synchronized void depositarEnHorno() throws InterruptedException {
         situacion = "Depositando";
-        logger.add(ID, " intentar depositar " + galletasProducidas + " galletas.");
+        logger.add(ID, " Intenta depositar " + galletasProducidas + " galletas.");
         introducirGalletas(galletasProducidas);
         galletasProducidas = 0; // Resetea la cantidad tras depositar
     }
@@ -130,10 +133,10 @@ public class Repostero extends Thread {
     public void descansar() throws InterruptedException {
         descansando = true;
         situacion = "Descansando";
-        logger.add(ID, " está descansando.");
+        logger.add(ID, " Está descansando.");
         cafeteria.usarCafetera(ID);
         Thread.sleep(Utilidades.numeroRandom(3000, 6000)); // Descanso entre 3 y 6 segundos
-        logger.add(ID, " terminó de descansar.");
+        logger.add(ID, " Terminó de descansar.");
         descansando = false;
     }
 
@@ -161,9 +164,10 @@ public class Repostero extends Thread {
         }
     }
 
-    public void setGalletasDesperdiciadas(int galletasDesperdiciadas) {
-        this.galletasDesperdiciadas = galletasDesperdiciadas;
+    public int getGalletasProducidas() {
+        return historicoProducidas;
     }
+
 
     public int getGalletasDesperdiciadas() {
         return galletasDesperdiciadas;
