@@ -24,7 +24,7 @@ public class Main {
         /****************************************
         *   BOOLEANOS POR SI SE QUIERE DESACTIVAR GUI/RMI
         ****************************************/
-        final boolean GUI_ACTIVADO = false;
+        final boolean GUI_ACTIVADO = true;
         final boolean RMI_ACTIVADO = true;
 
         /****************************************
@@ -87,6 +87,7 @@ public class Main {
                 Naming.rebind("//localhost/fabrica", fabrica);
 
                 logger.add("Sistema", "Servidor RMI listo...");
+                System.out.println("READY!");
 
             } catch (Exception e) {
                 logger.addE("Sistema", "Error en el servidor RMI: " + e.getMessage());
