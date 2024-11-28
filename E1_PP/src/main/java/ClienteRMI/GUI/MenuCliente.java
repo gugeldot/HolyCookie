@@ -418,9 +418,12 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
         while (true) {
             try {
                 estado_almacenadasAlm.setText(String.valueOf(fabrica.getCapacidadAlmacen()));
+                estado_consumidasAlm.setText(String.valueOf(fabrica.getGalletasConsumidas()));
+                
                 estado_horno1.setText(String.valueOf(fabrica.getGalletasHorneadas(0)));
                 estado_horno2.setText(String.valueOf(fabrica.getGalletasHorneadas(1)));
                 estado_horno3.setText(String.valueOf(fabrica.getGalletasHorneadas(2)));
+                
                 BarraSimple(barraH1, 0);
                 BarraSimple(barraH2, 1);
                 BarraSimple(barraH3, 2);

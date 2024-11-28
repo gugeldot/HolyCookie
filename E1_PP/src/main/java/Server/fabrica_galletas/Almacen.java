@@ -19,6 +19,7 @@ public class Almacen {
     private int CAPACIDAD_MAXIMA;
     private int capacidad_actual = 0; //READONLY por el resto
     private String ID; //READONLY
+    private int consumidas = 0;
 
     // Locks & Conditions
 
@@ -28,6 +29,10 @@ public class Almacen {
         this.CAPACIDAD_MAXIMA = CAPACIDAD_MAXIMA;
         this.ID = ID;
         this.logger = logger;
+    }
+
+    public int getConsumidas() {
+        return consumidas;
     }
 
     /*
@@ -94,8 +99,10 @@ public class Almacen {
                 capacidad_actual -= 100;
                 logger.add(ID, autor, "Se consumieron 100 galletas. Capacidad actual: " + capacidad_actual);
 
+                consumidas += 100;
                 // Notificar a los hilos en espera que la capacidad ha cambiado
                 notify();
+                
             } else {
                 logger.add(ID, autor, "No hay suficientes galletas para consumir 100. Capacidad actual: " + capacidad_actual);
             }

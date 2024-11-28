@@ -55,7 +55,7 @@ public class FabricaGalletasImpl extends UnicastRemoteObject implements FabricaG
     }
 
     public int getGalletasConsumidas() throws RemoteException {
-        return 0;
+        return almacen.getConsumidas();
     }
 
 }
