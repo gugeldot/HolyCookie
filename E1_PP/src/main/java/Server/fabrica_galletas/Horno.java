@@ -24,7 +24,8 @@ public class Horno extends Thread {
     private Logger logger;
     private boolean horneando = false;
     private boolean horneadas = false;
-
+    private int historicoGalletas = 0;
+    
     // Lock y condition
     private final Lock lock = new ReentrantLock();
     private final Condition lleno = lock.newCondition();
@@ -56,6 +57,10 @@ public class Horno extends Thread {
         return ID;
     }
 
+    public int getHistoricoGalletas() {
+        return historicoGalletas;
+    }
+
     /*
             OBJ: getter capacidad maxima
             PRE: -
@@ -85,7 +90,7 @@ public class Horno extends Thread {
                 desperdicio = 0;
                 
             }
-
+            
             logger.add(ID, " Se han agregado " + (cantidad - desperdicio) + " galletas. Total: " + capacidad_actual);
 
             // Si el horno se llena, notificar al hilo del horno
@@ -185,6 +190,7 @@ public class Horno extends Thread {
                 setHorneando(true);
                 Thread.sleep(DURACION_HORNEO);
                 logger.add(ID, " Horneado completado.");
+                historicoGalletas += capacidad_actual;
                 setHorneando(false);
                 setHorneadas(true);
 

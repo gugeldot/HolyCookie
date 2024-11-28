@@ -46,7 +46,7 @@ public class FabricaGalletasImpl extends UnicastRemoteObject implements FabricaG
     }
 
     public int getGalletasHorneadas(int indiceHornos) throws RemoteException {
-        return 0;
+        return hornos[indiceHornos].getHistoricoGalletas();
     }
 
     // Almacen
