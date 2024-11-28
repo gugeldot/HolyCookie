@@ -58,59 +58,51 @@ public class Almacen {
             POST: Capacidad actual actualizada o hilo en espera para ello  
      */
     public void almacenar(int cantidad, String autor) {
-        lock.lock();
         try {
-            while (capacidad_actual + cantidad > CAPACIDAD_MAXIMA) {
-                logger.add(ID, autor, " Capacidad maxima, esperando turno...");
-                noLleno.await();
+            // Bloque sincronizado para manejar la exclusión mutua
+            synchronized (this) {
+                // Esperar si no hay suficiente espacio en el almacén
+                while (getCapacidad_actual() + cantidad > CAPACIDAD_MAXIMA) {
+                    System.out.println("Capacidad actual: " + getCapacidad_actual());
+                    logger.add(ID, autor, "Capacidad máxima alcanzada, esperando turno...");
+                    wait();
+                }
+
+                // Agregar las galletas al almacén
+                capacidad_actual += cantidad;
+
+                System.out.println("Se almacenaron " + cantidad + " galletas. Capacidad actual: " + capacidad_actual);
+                logger.add(ID, autor, "Se almacenaron " + cantidad + " galletas. Capacidad actual: " + capacidad_actual);
+
+                // Notificar a todos los hilos que podrían estar esperando
+                notifyAll();
             }
 
-            // Fin de la espera, "Ha entrado"
-            capacidad_actual += cantidad;
-
-            Thread.sleep(Utilidades.numeroRandom(2, 4) * 1000);
-
-            logger.add(ID, autor, "Se almacenaron " + cantidad + " galletas. Capacidad actual: " + capacidad_actual);
-
-            noVacio.signalAll();
-        } catch (Exception e) {
-            System.out.println(e);
-        } finally {
-            lock.unlock();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            System.out.println("Hilo interrumpido: " + e.getMessage());
         }
-
-    }
-
-    /*
+    }   
+        /*
             OBJ: Consume galletas del almacen
                  Usa exclusion mutua mendiante locks y conditions
             PRE: Pensada para interaccion por boton en interfaz "Comer"
             POST: Capacidad actual actualizada o hilo en espera para ello 
-     */
-    public void comer() {
-        String autor = "Usuario";
-        if ((capacidad_actual >= 100)) {
-            capacidad_actual -= 100;
-            logger.add(ID, autor, "Se consumieron 100 galletas. Capacidad actual: " + capacidad_actual);
-        }
-        /*
-        // Antigua implementacion
-        lock.lock();
+         */
+    public synchronized void comer() {
         try {
-            while (capacidad_actual < 100) {
-                logger.add(ID,autor, "No hay suficientes galletas para consumir. Esperando...");
-                noVacio.await(); // En un futuro es probable que no haya que dejar el hilo congelado, si no descartar la solicitud
+            String autor = "Usuario";
+            if (capacidad_actual >= 100) {
+                capacidad_actual -= 100;
+                logger.add(ID, autor, "Se consumieron 100 galletas. Capacidad actual: " + capacidad_actual);
+
+                // Notificar a los hilos en espera que la capacidad ha cambiado
+                notify();
+            } else {
+                logger.add(ID, autor, "No hay suficientes galletas para consumir 100. Capacidad actual: " + capacidad_actual);
             }
-
-            // Fin de la espera, "Ha entrado"
-            capacidad_actual -= 100;
-
-            logger.add(ID,autor, "Se consumieron 100 galletas. Capacidad actual: " + capacidad_actual);
-            noLleno.signalAll();
-            
+        } catch (Exception e) {
+            System.out.println("Error en comer: " + e.getMessage());
         }
-        catch (Exception e) { System.out.println(e); } 
-        finally { lock.unlock(); }*/
     }
-
 }
