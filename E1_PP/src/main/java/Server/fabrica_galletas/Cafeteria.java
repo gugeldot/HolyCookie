@@ -1,6 +1,6 @@
-package ProgramacionConcurrente.fabrica_galletas;
+package Server.fabrica_galletas;
 
-import ProgramacionConcurrente.misc.Logger;
+import Server.misc.Logger;
 
 
 public class Cafeteria {
