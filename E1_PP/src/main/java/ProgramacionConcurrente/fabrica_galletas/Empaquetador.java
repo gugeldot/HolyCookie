@@ -34,6 +34,7 @@ public class Empaquetador extends Thread {
      * @throws InterruptedException si ocurre una interrupción durante la espera.
      */
     public void recogerGalletas() throws InterruptedException {
+        estado = "Esperando";
         int galletasRetiradas = hornoAsignado.retirarGalletas(20);
         if (galletasRetiradas > 0) {
             tanda++;

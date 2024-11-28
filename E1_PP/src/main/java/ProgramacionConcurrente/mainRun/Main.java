@@ -1,4 +1,4 @@
-package mainRun;
+package ProgramacionConcurrente.mainRun;
 
 import misc.Logger;
 import fabrica_galletas.*;
