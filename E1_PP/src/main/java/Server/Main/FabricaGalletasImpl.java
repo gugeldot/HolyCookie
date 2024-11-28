@@ -6,7 +6,8 @@ import java.rmi.server.UnicastRemoteObject;
 import java.rmi.RemoteException;
 
 public class FabricaGalletasImpl extends UnicastRemoteObject implements FabricaGalletasRemote {
-
+    
+    
     private Repostero[] reposteros;
     private Horno[] hornos;
     private Almacen almacen;
