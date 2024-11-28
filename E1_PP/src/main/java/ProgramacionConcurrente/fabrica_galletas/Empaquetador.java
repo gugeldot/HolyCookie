@@ -1,7 +1,7 @@
-package fabrica_galletas;
+package ProgramacionConcurrente.fabrica_galletas;
 
-import misc.Logger;
-import misc.Utilidades;
+import ProgramacionConcurrente.misc.Logger;
+import ProgramacionConcurrente.misc.Utilidades;
 
 public class Empaquetador extends Thread {
     private String id;

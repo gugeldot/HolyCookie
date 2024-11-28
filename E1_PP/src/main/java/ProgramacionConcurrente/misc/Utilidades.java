@@ -1,4 +1,4 @@
-package misc;
+package ProgramacionConcurrente.misc;
 
 /*
 *   Objetivo: Metodos para funciones sin un contexto especifico y potencialmente

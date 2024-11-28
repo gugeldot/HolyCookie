@@ -1,4 +1,4 @@
-package misc;
+package ProgramacionConcurrente.misc;
 
 /*
 *   Objetivo: Clase especifica para poder annadir eventos al log de ejecución

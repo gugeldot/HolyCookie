@@ -1,10 +1,10 @@
-package fabrica_galletas;
+package ProgramacionConcurrente.fabrica_galletas;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import misc.Logger;
+import ProgramacionConcurrente.misc.Logger;
 
 /*
 *   Objetivo: Implementacion del horno

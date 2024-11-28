@@ -1,13 +1,9 @@
-package INTERFAZ;
+package ProgramacionConcurrente.INTERFAZ;
 
-import fabrica_galletas.*;
+import ProgramacionConcurrente.fabrica_galletas.*;
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JProgressBar;
-import javax.swing.Timer;
+
 
 /**
  *

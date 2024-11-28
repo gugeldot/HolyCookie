@@ -1,8 +1,8 @@
 package ProgramacionConcurrente.mainRun;
 
-import misc.Logger;
-import fabrica_galletas.*;
-import INTERFAZ.Principal;
+import ProgramacionConcurrente.misc.Logger;
+import ProgramacionConcurrente.fabrica_galletas.*;
+import ProgramacionConcurrente.INTERFAZ.Principal;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
