@@ -27,11 +27,11 @@ public class FabricaGalletasImpl extends UnicastRemoteObject implements FabricaG
     }
 
     public void parar(int indiceRepostero) throws RemoteException {
-        // A implementar
+        reposteros[indiceRepostero].parar();
     }
 
     public void reanudar(int indiceRepostero) throws RemoteException {
-        // A implementar
+        reposteros[indiceRepostero].reanudar();
     }
 
     // Hornos

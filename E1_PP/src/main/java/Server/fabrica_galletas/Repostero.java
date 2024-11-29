@@ -4,8 +4,6 @@ package Server.fabrica_galletas;
  *
  * @author David Serrano
  */
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 import Server.misc.Utilidades;
 import Server.misc.Logger;
 
@@ -26,7 +24,15 @@ public class Repostero extends Thread {
     private Horno[] arrayDeHornos;
     private int tandas = 0;
 
-    private final Lock lock = new ReentrantLock();
+    
+    // A COMPLETAR
+    public void parar() {
+
+    }
+
+    public void reanudar() {
+
+    }
 
     public int getTandasProducidas() {
         return tandasProducidas;
@@ -87,7 +93,7 @@ public class Repostero extends Thread {
         for (Horno horno : arrayDeHornos) {
             if (!horno.estaLleno() && !horno.isHorneadas()) {
                 galletasDesperdiciadas += horno.agregarGalletas(galletas);
-                
+
                 logger.add(ID, galletas + " colocadas en " + horno.getID());
                 break;
             } else {
@@ -167,7 +173,6 @@ public class Repostero extends Thread {
     public int getGalletasProducidas() {
         return historicoProducidas;
     }
-
 
     public int getGalletasDesperdiciadas() {
         return galletasDesperdiciadas;

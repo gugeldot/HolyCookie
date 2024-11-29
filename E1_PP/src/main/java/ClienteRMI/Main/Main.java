@@ -16,7 +16,7 @@ public class Main {
         
         MenuCliente menuCliente = new MenuCliente(fabrica);
         menuCliente.setVisible(true);
-        Thread thread = new Thread(menuCliente); // Pasar Principal como Runnable a un Thread
-        thread.start(); // Inicia el hilo, llamando al método run
+        Thread thread = new Thread(menuCliente); 
+        thread.start(); 
     }
 }
