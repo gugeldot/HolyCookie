@@ -10,7 +10,6 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JProgressBar;
 
-
 /**
  *
  * @author Gugeldot
@@ -131,11 +130,10 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             // Si el horno ha terminado, llenamos la barra
             barra.setValue(100);  // La barra se llena
             barra.setForeground(Color.green);
-        }
-        else if (!horno.isHorneadas() && !horno.isHorneando()){
+        } else if (!horno.isHorneadas() && !horno.isHorneando()) {
             // Se  vacia si esta cargandose 
             barra.setValue(0);  // La barra se llena
-            
+
         }
     }
 
@@ -199,17 +197,17 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         barraH3 = new javax.swing.JProgressBar();
         logo = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        closeButton = new javax.swing.JLabel();
-        minButton = new javax.swing.JLabel();
+        botonCerrar = new javax.swing.JButton();
+        botonMin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setForeground(new java.awt.Color(255, 255, 255));
-        setMaximumSize(new java.awt.Dimension(1060, 700));
-        setMinimumSize(new java.awt.Dimension(1060, 700));
+        setMaximumSize(new java.awt.Dimension(1058, 695));
+        setMinimumSize(new java.awt.Dimension(1058, 695));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1060, 700));
+        setPreferredSize(new java.awt.Dimension(1058, 695));
         setResizable(false);
         setSize(new java.awt.Dimension(1060, 700));
 
@@ -614,34 +612,58 @@ public class Principal extends javax.swing.JFrame implements Runnable {
 
         jPanel2.setBackground(new java.awt.Color(72, 24, 29));
 
-        closeButton.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
-        closeButton.setForeground(new java.awt.Color(255, 255, 255));
-        closeButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        closeButton.setText("x");
-        closeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        botonCerrar.setBackground(new java.awt.Color(72, 24, 29));
+        botonCerrar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        botonCerrar.setForeground(new java.awt.Color(255, 255, 255));
+        botonCerrar.setText("X");
+        botonCerrar.setBorder(null);
+        botonCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        botonCerrar.setFocusable(false);
+        botonCerrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botonCerrar.setOpaque(true);
+        botonCerrar.setPreferredSize(new java.awt.Dimension(35, 35));
+        botonCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                closeButtonMouseClicked(evt);
+                botonCerrarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonCerrarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonCerrarMouseExited(evt);
             }
         });
-        closeButton.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                closeButtonKeyReleased(evt);
+        botonCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCerrarActionPerformed(evt);
             }
         });
 
-        minButton.setFont(new java.awt.Font("Segoe UI Black", 1, 30)); // NOI18N
-        minButton.setForeground(new java.awt.Color(255, 255, 255));
-        minButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        minButton.setText("_");
-        minButton.setAlignmentY(0.0F);
-        minButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        botonMin.setBackground(new java.awt.Color(72, 24, 29));
+        botonMin.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        botonMin.setForeground(new java.awt.Color(255, 255, 255));
+        botonMin.setText("_");
+        botonMin.setToolTipText("");
+        botonMin.setBorder(null);
+        botonMin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        botonMin.setFocusable(false);
+        botonMin.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botonMin.setOpaque(true);
+        botonMin.setPreferredSize(new java.awt.Dimension(35, 35));
+        botonMin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                minButtonMouseClicked(evt);
+                botonMinMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonMinMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonMinMouseExited(evt);
             }
         });
-        minButton.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                minButtonKeyReleased(evt);
+        botonMin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonMinActionPerformed(evt);
             }
         });
 
@@ -649,20 +671,19 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(minButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(closeButton, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(botonCerrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                    .addComponent(botonMin, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(closeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(minButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(587, Short.MAX_VALUE))
+                .addComponent(botonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botonMin, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(601, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 0, 70, 700));
@@ -671,7 +692,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1066, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1058, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -696,21 +717,39 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         setLocation(x - xMouse, y - yMouse);
     }//GEN-LAST:event_jPanel1MouseDragged
 
-    private void closeButtonKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_closeButtonKeyReleased
+    private void botonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCerrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonCerrarActionPerformed
+
+    private void botonCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCerrarMouseClicked
+       System.exit(0);
+    }//GEN-LAST:event_botonCerrarMouseClicked
+
+    private void botonCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCerrarMouseEntered
         
-    }//GEN-LAST:event_closeButtonKeyReleased
+        botonCerrar.setBackground(Color.red);
+    }//GEN-LAST:event_botonCerrarMouseEntered
 
-    private void minButtonKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_minButtonKeyReleased
-        
-    }//GEN-LAST:event_minButtonKeyReleased
+    private void botonCerrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCerrarMouseExited
+        botonCerrar.setBackground(new Color(72,24,29));
+    }//GEN-LAST:event_botonCerrarMouseExited
 
-    private void closeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeButtonMouseClicked
-        System.exit(0); // Cierra la aplicación
-    }//GEN-LAST:event_closeButtonMouseClicked
+    private void botonMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonMinMouseClicked
+       setState(Principal.ICONIFIED);
+    }//GEN-LAST:event_botonMinMouseClicked
 
-    private void minButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minButtonMouseClicked
-        setState(Principal.ICONIFIED); // Minimiza la ventana
-    }//GEN-LAST:event_minButtonMouseClicked
+    private void botonMinMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonMinMouseEntered
+        botonMin.setBackground(new Color(124,24,29));
+    }//GEN-LAST:event_botonMinMouseEntered
+
+    private void botonMinMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonMinMouseExited
+       
+       botonMin.setBackground(new Color(72,24,29));
+    }//GEN-LAST:event_botonMinMouseExited
+
+    private void botonMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMinActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonMinActionPerformed
 
     public void run() {
         while (true) {
@@ -754,9 +793,13 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             tanda5_emp3.setBackground(colorTandaEmpaquetador(2, 5));
 
             estado_almacen.setText(String.valueOf(almacen.getCapacidad_actual()));
-            
+
             // Descanso minimo para no saturar memoria
-            try {Thread.sleep(100);} catch (InterruptedException ex) {System.out.println(ex);}
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
         }
     }
 
@@ -785,7 +828,8 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     private javax.swing.JProgressBar barraH1;
     private javax.swing.JProgressBar barraH2;
     private javax.swing.JProgressBar barraH3;
-    private javax.swing.JLabel closeButton;
+    private javax.swing.JButton botonCerrar;
+    private javax.swing.JButton botonMin;
     private javax.swing.JLabel estado_almacen;
     private javax.swing.JLabel estado_cafetera;
     private javax.swing.JLabel estado_cafetera2;
@@ -801,7 +845,6 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel logo;
-    private javax.swing.JLabel minButton;
     private javax.swing.JLabel numero_galletas;
     private javax.swing.JLabel numero_galletas2;
     private javax.swing.JLabel numero_galletas3;
