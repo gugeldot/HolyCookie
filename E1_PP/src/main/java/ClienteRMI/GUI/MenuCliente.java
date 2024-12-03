@@ -514,13 +514,17 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
                 BarraSimple(barraH3, 2);
 
             } catch (RemoteException ex) {
-                Logger.getLogger(MenuCliente.class.getName()).log(Level.SEVERE, null, ex);
+                // Ventana de error
+                javax.swing.JOptionPane.showMessageDialog(this, "Se perdió la conexión con el servidor. La aplicación se cerrará.", "Error de conexion RMI", javax.swing.JOptionPane.ERROR_MESSAGE);
+
+                // Salida de la aplicación
+                System.exit(0);
             }
             // Descanso minimo para no saturar memoria
             try {
                 Thread.sleep(SEGUNDOS_UPDATE * 1000);
             } catch (InterruptedException ex) {
-                System.out.println(ex);
+                //System.out.println(ex);
             }
         }
     }
