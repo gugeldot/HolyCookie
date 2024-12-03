@@ -23,15 +23,27 @@ public class Repostero extends Thread {
     private Cafeteria cafeteria;
     private Horno[] arrayDeHornos;
     private int tandas = 0;
+    
+    private boolean enPausa = false; // Flag para controlar la pausa
+    private final Object lock = new Object(); // Objeto de bloqueo para sincronización
 
     
-    // A COMPLETAR
+    
+    // Método para pausar el hilo
     public void parar() {
-
+        synchronized (lock) {
+            enPausa = true; // Cambia el estado a pausa
+        }
+        situacion = "PARADO";
     }
 
+    // Método para reanudar el hilo
     public void reanudar() {
-
+        synchronized (lock) {
+            enPausa = false; // Cambia el estado a reanudado
+            lock.notify(); // Despierta al hilo bloqueado en el wait()
+        }
+        situacion = "REANUDANDO";
     }
 
     public int getTandasProducidas() {
@@ -145,6 +157,14 @@ public class Repostero extends Thread {
         logger.add(ID, " Terminó de descansar.");
         descansando = false;
     }
+    
+    public void checkPausa() throws  InterruptedException {
+        synchronized (lock) {
+            while (enPausa) {
+                lock.wait(); // El hilo se bloquea hasta que se le indique que reanude
+            }
+        }
+    }
 
     /*
         OBJ: Ciclo principal del repostero, alternando entre producción, depósito y descanso.
@@ -158,11 +178,20 @@ public class Repostero extends Thread {
                 tandas = Utilidades.numeroRandom(3, 5); // De 3 a 5 tandas antes de descansar
 
                 for (int i = 0; i < tandas; i++) {
+                    // Antes de cada tarea, comprobamos si el hilo está en pausa
+                    checkPausa();
                     producirGalletas();  // Produce una tanda
+                    checkPausa();
                     depositarEnHorno(); // Deposita las galletas
+                    // Pausar después de cada tarea, si es necesario
+                    checkPausa();
                 }
 
                 descansar();
+
+                // Pausar al final de cada ciclo de tandas, si es necesario
+                checkPausa();
+
                 tandasProducidas = 0;
             }
         } catch (InterruptedException e) {
