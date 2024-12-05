@@ -177,10 +177,10 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(662, 602));
-        setMinimumSize(new java.awt.Dimension(662, 602));
+        setMaximumSize(new java.awt.Dimension(660, 600));
+        setMinimumSize(new java.awt.Dimension(660, 600));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(662, 602));
+        setPreferredSize(new java.awt.Dimension(660, 600));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -786,11 +786,11 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
 
     private void botonCerrar2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCerrar2MouseEntered
 
-        botonCerrar.setBackground(Color.red);
+        botonCerrar2.setBackground(Color.red);
     }//GEN-LAST:event_botonCerrar2MouseEntered
 
     private void botonCerrar2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCerrar2MouseExited
-        botonCerrar.setBackground(new Color(72,24,29));
+        botonCerrar2.setBackground(new Color(72,24,29));
     }//GEN-LAST:event_botonCerrar2MouseExited
 
     private void botonCerrar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCerrar2ActionPerformed
@@ -802,12 +802,12 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_botonMin2MouseClicked
 
     private void botonMin2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonMin2MouseEntered
-        botonMin.setBackground(new Color(124,24,29));
+        botonMin2.setBackground(new Color(124,24,29));
     }//GEN-LAST:event_botonMin2MouseEntered
 
     private void botonMin2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonMin2MouseExited
 
-        botonMin.setBackground(new Color(72,24,29));
+        botonMin2.setBackground(new Color(72,24,29));
     }//GEN-LAST:event_botonMin2MouseExited
 
     private void botonMin2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMin2ActionPerformed
