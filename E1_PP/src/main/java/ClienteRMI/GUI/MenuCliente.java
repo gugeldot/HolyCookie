@@ -177,13 +177,14 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(660, 600));
-        setMinimumSize(new java.awt.Dimension(660, 600));
+        setMaximumSize(new java.awt.Dimension(660, 602));
+        setMinimumSize(new java.awt.Dimension(660, 602));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(660, 600));
+        setPreferredSize(new java.awt.Dimension(660, 602));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         jPanel1.setMaximumSize(new java.awt.Dimension(662, 602));
         jPanel1.setMinimumSize(new java.awt.Dimension(662, 602));
         jPanel1.setName(""); // NOI18N
@@ -573,6 +574,7 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 0, 70, 700));
 
         jPanel4.setBackground(new java.awt.Color(72, 24, 29));
+        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
         botonCerrar2.setBackground(new java.awt.Color(72, 24, 29));
         botonCerrar2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -633,7 +635,7 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(botonCerrar2, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+            .addComponent(botonCerrar2, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
             .addComponent(botonMin2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
@@ -642,7 +644,7 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
                 .addComponent(botonCerrar2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botonMin2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 501, Short.MAX_VALUE))
+                .addGap(0, 497, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 0, 60, 600));
