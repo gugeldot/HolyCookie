@@ -51,6 +51,9 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel2 = new javax.swing.JPanel();
+        botonCerrar = new javax.swing.JButton();
+        botonMin = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         Label_repostero1 = new javax.swing.JLabel();
         Label_repostero2 = new javax.swing.JLabel();
@@ -90,12 +93,111 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
         boton_rep3 = new javax.swing.JButton();
         boton_rep4 = new javax.swing.JButton();
         boton_rep5 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        botonCerrar1 = new javax.swing.JButton();
+        botonMin1 = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        botonCerrar2 = new javax.swing.JButton();
+        botonMin2 = new javax.swing.JButton();
+
+        jPanel2.setBackground(new java.awt.Color(72, 24, 29));
+
+        botonCerrar.setBackground(new java.awt.Color(72, 24, 29));
+        botonCerrar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        botonCerrar.setForeground(new java.awt.Color(255, 255, 255));
+        botonCerrar.setText("X");
+        botonCerrar.setBorder(null);
+        botonCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        botonCerrar.setFocusable(false);
+        botonCerrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botonCerrar.setOpaque(true);
+        botonCerrar.setPreferredSize(new java.awt.Dimension(35, 35));
+        botonCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonCerrarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonCerrarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonCerrarMouseExited(evt);
+            }
+        });
+        botonCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCerrarActionPerformed(evt);
+            }
+        });
+
+        botonMin.setBackground(new java.awt.Color(72, 24, 29));
+        botonMin.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        botonMin.setForeground(new java.awt.Color(255, 255, 255));
+        botonMin.setText("_");
+        botonMin.setToolTipText("");
+        botonMin.setBorder(null);
+        botonMin.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        botonMin.setFocusable(false);
+        botonMin.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botonMin.setOpaque(true);
+        botonMin.setPreferredSize(new java.awt.Dimension(35, 35));
+        botonMin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonMinMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonMinMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonMinMouseExited(evt);
+            }
+        });
+        botonMin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonMinActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(botonCerrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                    .addComponent(botonMin, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(botonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botonMin, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(601, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(600, 700));
+        setMaximumSize(new java.awt.Dimension(662, 602));
+        setMinimumSize(new java.awt.Dimension(662, 602));
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(662, 602));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setMaximumSize(new java.awt.Dimension(662, 602));
+        jPanel1.setMinimumSize(new java.awt.Dimension(662, 602));
+        jPanel1.setName(""); // NOI18N
+        jPanel1.setPreferredSize(new java.awt.Dimension(662, 602));
+        jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jPanel1MouseDragged(evt);
+            }
+        });
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel1MousePressed(evt);
+            }
+        });
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Label_repostero1.setBackground(new java.awt.Color(0, 0, 0));
@@ -329,10 +431,9 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
 
         boton_rep1.setBackground(new java.awt.Color(204, 204, 204));
         boton_rep1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        boton_rep1.setForeground(new java.awt.Color(0, 0, 0));
         boton_rep1.setText("PARAR");
         boton_rep1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        boton_rep1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        boton_rep1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         boton_rep1.setOpaque(true);
         boton_rep1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -343,10 +444,9 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
 
         boton_rep2.setBackground(new java.awt.Color(204, 204, 204));
         boton_rep2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        boton_rep2.setForeground(new java.awt.Color(0, 0, 0));
         boton_rep2.setText("PARAR");
         boton_rep2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        boton_rep2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        boton_rep2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         boton_rep2.setOpaque(true);
         boton_rep2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -357,10 +457,9 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
 
         boton_rep3.setBackground(new java.awt.Color(204, 204, 204));
         boton_rep3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        boton_rep3.setForeground(new java.awt.Color(0, 0, 0));
         boton_rep3.setText("PARAR");
         boton_rep3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        boton_rep3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        boton_rep3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         boton_rep3.setOpaque(true);
         boton_rep3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -371,10 +470,9 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
 
         boton_rep4.setBackground(new java.awt.Color(204, 204, 204));
         boton_rep4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        boton_rep4.setForeground(new java.awt.Color(0, 0, 0));
         boton_rep4.setText("PARAR");
         boton_rep4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        boton_rep4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        boton_rep4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         boton_rep4.setOpaque(true);
         boton_rep4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -385,10 +483,9 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
 
         boton_rep5.setBackground(new java.awt.Color(204, 204, 204));
         boton_rep5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        boton_rep5.setForeground(new java.awt.Color(0, 0, 0));
         boton_rep5.setText("PARAR");
         boton_rep5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        boton_rep5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        boton_rep5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         boton_rep5.setOpaque(true);
         boton_rep5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -397,15 +494,168 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
         });
         jPanel1.add(boton_rep5, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, 60, 20));
 
+        jPanel3.setBackground(new java.awt.Color(72, 24, 29));
+
+        botonCerrar1.setBackground(new java.awt.Color(72, 24, 29));
+        botonCerrar1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        botonCerrar1.setForeground(new java.awt.Color(255, 255, 255));
+        botonCerrar1.setText("X");
+        botonCerrar1.setBorder(null);
+        botonCerrar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        botonCerrar1.setFocusable(false);
+        botonCerrar1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botonCerrar1.setOpaque(true);
+        botonCerrar1.setPreferredSize(new java.awt.Dimension(35, 35));
+        botonCerrar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonCerrar1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonCerrar1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonCerrar1MouseExited(evt);
+            }
+        });
+        botonCerrar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCerrar1ActionPerformed(evt);
+            }
+        });
+
+        botonMin1.setBackground(new java.awt.Color(72, 24, 29));
+        botonMin1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        botonMin1.setForeground(new java.awt.Color(255, 255, 255));
+        botonMin1.setText("_");
+        botonMin1.setToolTipText("");
+        botonMin1.setBorder(null);
+        botonMin1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        botonMin1.setFocusable(false);
+        botonMin1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botonMin1.setOpaque(true);
+        botonMin1.setPreferredSize(new java.awt.Dimension(35, 35));
+        botonMin1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonMin1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonMin1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonMin1MouseExited(evt);
+            }
+        });
+        botonMin1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonMin1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(botonCerrar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                    .addComponent(botonMin1, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(botonCerrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botonMin1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(601, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 0, 70, 700));
+
+        jPanel4.setBackground(new java.awt.Color(72, 24, 29));
+
+        botonCerrar2.setBackground(new java.awt.Color(72, 24, 29));
+        botonCerrar2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        botonCerrar2.setForeground(new java.awt.Color(255, 255, 255));
+        botonCerrar2.setText("X");
+        botonCerrar2.setBorder(null);
+        botonCerrar2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        botonCerrar2.setFocusable(false);
+        botonCerrar2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botonCerrar2.setOpaque(true);
+        botonCerrar2.setPreferredSize(new java.awt.Dimension(35, 35));
+        botonCerrar2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonCerrar2MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonCerrar2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonCerrar2MouseExited(evt);
+            }
+        });
+        botonCerrar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCerrar2ActionPerformed(evt);
+            }
+        });
+
+        botonMin2.setBackground(new java.awt.Color(72, 24, 29));
+        botonMin2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        botonMin2.setForeground(new java.awt.Color(255, 255, 255));
+        botonMin2.setText("_");
+        botonMin2.setToolTipText("");
+        botonMin2.setBorder(null);
+        botonMin2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        botonMin2.setFocusable(false);
+        botonMin2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botonMin2.setOpaque(true);
+        botonMin2.setPreferredSize(new java.awt.Dimension(35, 35));
+        botonMin2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonMin2MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonMin2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonMin2MouseExited(evt);
+            }
+        });
+        botonMin2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonMin2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(botonCerrar2, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+            .addComponent(botonMin2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(botonCerrar2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botonMin2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 501, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 0, 60, 600));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -461,6 +711,119 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
             Logger.getLogger(MenuCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_boton_rep5ActionPerformed
+
+    private void botonCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCerrarMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_botonCerrarMouseClicked
+
+    private void botonCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCerrarMouseEntered
+
+        botonCerrar.setBackground(Color.red);
+    }//GEN-LAST:event_botonCerrarMouseEntered
+
+    private void botonCerrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCerrarMouseExited
+        botonCerrar.setBackground(new Color(72,24,29));
+    }//GEN-LAST:event_botonCerrarMouseExited
+
+    private void botonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCerrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonCerrarActionPerformed
+
+    private void botonMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonMinMouseClicked
+        setState(MenuCliente.ICONIFIED);
+    }//GEN-LAST:event_botonMinMouseClicked
+
+    private void botonMinMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonMinMouseEntered
+        botonMin.setBackground(new Color(124,24,29));
+    }//GEN-LAST:event_botonMinMouseEntered
+
+    private void botonMinMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonMinMouseExited
+
+        botonMin.setBackground(new Color(72,24,29));
+    }//GEN-LAST:event_botonMinMouseExited
+
+    private void botonMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMinActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonMinActionPerformed
+
+    private void botonCerrar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCerrar1MouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_botonCerrar1MouseClicked
+
+    private void botonCerrar1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCerrar1MouseEntered
+
+        botonCerrar.setBackground(Color.red);
+    }//GEN-LAST:event_botonCerrar1MouseEntered
+
+    private void botonCerrar1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCerrar1MouseExited
+        botonCerrar.setBackground(new Color(72,24,29));
+    }//GEN-LAST:event_botonCerrar1MouseExited
+
+    private void botonCerrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCerrar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonCerrar1ActionPerformed
+
+    private void botonMin1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonMin1MouseClicked
+        setState(MenuCliente.ICONIFIED);
+    }//GEN-LAST:event_botonMin1MouseClicked
+
+    private void botonMin1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonMin1MouseEntered
+        botonMin.setBackground(new Color(124,24,29));
+    }//GEN-LAST:event_botonMin1MouseEntered
+
+    private void botonMin1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonMin1MouseExited
+
+        botonMin.setBackground(new Color(72,24,29));
+    }//GEN-LAST:event_botonMin1MouseExited
+
+    private void botonMin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMin1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonMin1ActionPerformed
+
+    private void botonCerrar2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCerrar2MouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_botonCerrar2MouseClicked
+
+    private void botonCerrar2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCerrar2MouseEntered
+
+        botonCerrar.setBackground(Color.red);
+    }//GEN-LAST:event_botonCerrar2MouseEntered
+
+    private void botonCerrar2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCerrar2MouseExited
+        botonCerrar.setBackground(new Color(72,24,29));
+    }//GEN-LAST:event_botonCerrar2MouseExited
+
+    private void botonCerrar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCerrar2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonCerrar2ActionPerformed
+
+    private void botonMin2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonMin2MouseClicked
+        setState(MenuCliente.ICONIFIED);
+    }//GEN-LAST:event_botonMin2MouseClicked
+
+    private void botonMin2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonMin2MouseEntered
+        botonMin.setBackground(new Color(124,24,29));
+    }//GEN-LAST:event_botonMin2MouseEntered
+
+    private void botonMin2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonMin2MouseExited
+
+        botonMin.setBackground(new Color(72,24,29));
+    }//GEN-LAST:event_botonMin2MouseExited
+
+    private void botonMin2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMin2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonMin2ActionPerformed
+    private int xMouse, yMouse;
+    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
+        xMouse = evt.getX();
+        yMouse = evt.getY();
+    }//GEN-LAST:event_jPanel1MousePressed
+
+    private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        setLocation(x - xMouse, y - yMouse);
+    }//GEN-LAST:event_jPanel1MouseDragged
 
     // 1 segundo de actualizacion es demasiado como para que la representacion sea fluida
     // se cambia a barra con colores 
@@ -548,6 +911,12 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
     private javax.swing.JProgressBar barraH1;
     private javax.swing.JProgressBar barraH2;
     private javax.swing.JProgressBar barraH3;
+    private javax.swing.JButton botonCerrar;
+    private javax.swing.JButton botonCerrar1;
+    private javax.swing.JButton botonCerrar2;
+    private javax.swing.JButton botonMin;
+    private javax.swing.JButton botonMin1;
+    private javax.swing.JButton botonMin2;
     private javax.swing.JButton boton_rep1;
     private javax.swing.JButton boton_rep2;
     private javax.swing.JButton boton_rep3;
@@ -569,5 +938,8 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
     private javax.swing.JLabel estado_horno2;
     private javax.swing.JLabel estado_horno3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     // End of variables declaration//GEN-END:variables
 }
