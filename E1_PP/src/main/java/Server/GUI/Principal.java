@@ -590,7 +590,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         jButton1.setBackground(new java.awt.Color(204, 204, 204));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton1.setText("COMER");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -617,7 +617,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         botonCerrar.setForeground(new java.awt.Color(255, 255, 255));
         botonCerrar.setText("X");
         botonCerrar.setBorder(null);
-        botonCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        botonCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         botonCerrar.setFocusable(false);
         botonCerrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botonCerrar.setOpaque(true);
@@ -645,7 +645,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         botonMin.setText("_");
         botonMin.setToolTipText("");
         botonMin.setBorder(null);
-        botonMin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        botonMin.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         botonMin.setFocusable(false);
         botonMin.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botonMin.setOpaque(true);
