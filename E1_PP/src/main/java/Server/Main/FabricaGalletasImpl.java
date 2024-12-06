@@ -1,5 +1,9 @@
 package Server.Main;
 
+/**************************************************************************************
+* IMPLEMENTACION DE INTERFAZ RMI (para pasar todos los objs y poner metodos)
+**************************************************************************************/
+
 import Server.fabrica_galletas.*;
 import RMI.FabricaGalletasRemote;
 import java.rmi.server.UnicastRemoteObject;
@@ -17,7 +21,7 @@ public class FabricaGalletasImpl extends UnicastRemoteObject implements FabricaG
         this.almacen = almacen;
     }
 
-    // Reposteros 
+    // Reposteros ==============================================================
     public int getGalletasGeneradas(int indiceRepostero) throws RemoteException {
         return reposteros[indiceRepostero].getGalletasProducidas();
     }
@@ -34,7 +38,7 @@ public class FabricaGalletasImpl extends UnicastRemoteObject implements FabricaG
         reposteros[indiceRepostero].reanudar();
     }
 
-    // Hornos
+    // Hornos ==============================================================
     public boolean isHorneando(int indiceHornos) throws RemoteException {
         return hornos[indiceHornos].isHorneando();
     }
@@ -47,7 +51,7 @@ public class FabricaGalletasImpl extends UnicastRemoteObject implements FabricaG
         return hornos[indiceHornos].getHistoricoGalletas();
     }
 
-    // Almacen
+    // Almacen ==============================================================
     public int getCapacidadAlmacen() throws RemoteException {
         return almacen.getCapacidad_actual();
     }

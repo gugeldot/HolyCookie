@@ -1,8 +1,9 @@
 package Server.fabrica_galletas;
 
 /**
- *
- * @author David Serrano
+ * ****************************
+ * IMPLEMENTACION DE REPOSTERO
+ ******************************
  */
 import Server.misc.Utilidades;
 import Server.misc.Logger;
@@ -23,11 +24,46 @@ public class Repostero extends Thread {
     private Cafeteria cafeteria;
     private Horno[] arrayDeHornos;
     private int tandas = 0;
-    
+
     private boolean enPausa = false; // Flag para controlar la pausa
     private final Object lock = new Object(); // Objeto de bloqueo para sincronización
 
+    public Repostero(String ID, Horno[] arrayDeHornos, Cafeteria cafeteria, Logger logger) {
+        this.ID = ID;
+        this.logger = logger;
+        this.arrayDeHornos = arrayDeHornos;
+        this.cafeteria = cafeteria;
+        situacion = "Iniciado";
+    }
     
+     public int getTandasProducidas() {
+        return tandasProducidas;
+    }
+
+    public String getSituacion() {
+        return situacion;
+    }
+
+    public int getTandas() {
+        return tandas;
+    }
+
+    public String getID() {
+        return ID;
+    }
+    
+    public int getGalletasProducidas() {
+        return historicoProducidas;
+    }
+
+    public int getGalletasDesperdiciadas() {
+        return galletasDesperdiciadas;
+    }
+    
+    
+    public boolean isDescansando() {
+        return descansando;
+    }
     
     // Método para pausar el hilo
     public void parar() {
@@ -46,34 +82,19 @@ public class Repostero extends Thread {
         situacion = "REANUDANDO";
     }
 
-    public int getTandasProducidas() {
-        return tandasProducidas;
+    /*
+        OBJ: Bloquea hilo hasta que se le indique que reanude
+        PRE: -
+        POST: -
+     */
+    public void checkPausa() throws InterruptedException {
+        synchronized (lock) {
+            while (enPausa) {
+                lock.wait(); 
+            }
+        }
     }
-
-    public String getSituacion() {
-        return situacion;
-    }
-
-    public int getTandas() {
-        return tandas;
-    }
-
-    public String getID() {
-        return ID;
-    }
-
-    public Repostero(String ID, Horno[] arrayDeHornos, Cafeteria cafeteria, Logger logger) {
-        this.ID = ID;
-        this.logger = logger;
-        this.arrayDeHornos = arrayDeHornos;
-        this.cafeteria = cafeteria;
-        situacion = "Iniciado";
-    }
-
-    public boolean isDescansando() {
-        return descansando;
-    }
-
+    
     /*
         OBJ: Verificar si todos los hornos están llenos.
         PRE: El array de hornos debe estar inicializado.
@@ -157,14 +178,6 @@ public class Repostero extends Thread {
         logger.add(ID, " Terminó de descansar.");
         descansando = false;
     }
-    
-    public void checkPausa() throws  InterruptedException {
-        synchronized (lock) {
-            while (enPausa) {
-                lock.wait(); // El hilo se bloquea hasta que se le indique que reanude
-            }
-        }
-    }
 
     /*
         OBJ: Ciclo principal del repostero, alternando entre producción, depósito y descanso.
@@ -197,13 +210,5 @@ public class Repostero extends Thread {
         } catch (InterruptedException e) {
             logger.addE(ID, " fue interrumpido.");
         }
-    }
-
-    public int getGalletasProducidas() {
-        return historicoProducidas;
-    }
-
-    public int getGalletasDesperdiciadas() {
-        return galletasDesperdiciadas;
-    }
+    }    
 }

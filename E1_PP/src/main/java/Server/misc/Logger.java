@@ -7,8 +7,7 @@ package Server.misc;
             + Seleccionable que lo haga o no en instanciación
         + Pasar como parametro en la instancia de cualquier clase el logger 
         instanciado en Main.
-    USO GENERAL: logger.add("ADMIN", "Esto es una ");
-*   Autor: Rodrigo Palomo 
+    USO GENERAL: logger.add("ADMIN", "Esto es una "); 
  */
 import java.io.BufferedWriter;
 import java.io.File;
@@ -69,8 +68,8 @@ public class Logger {
 
     private void write(String msg) {
         /*
-            OBJ: Metodo privado exclusivamente dedicada a cargar el archivo y 
-                    volcar los datos en el
+            OBJ: Metodo privado exclusivamente dedicado a cargar el archivo y 
+                    volcar los datos en él
             PRE: Archivo existe
             POST: Datos escritos
          */
@@ -121,6 +120,8 @@ public class Logger {
         write(cadena);
     }
     
+    // Pseudo-sobrecarga de metodo, es un add pero con el código de error
+    // Para buscar más facilmente en el log errores.
     public void addE(String author,String msg){
         add(author,"[[ERROR]]--"+ msg + "--[[ERROR]]");
     }

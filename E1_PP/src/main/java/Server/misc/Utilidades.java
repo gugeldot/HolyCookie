@@ -3,13 +3,9 @@ package Server.misc;
 /*
 *   Objetivo: Metodos para funciones sin un contexto especifico y potencialmente
                 muy usadas.
-    Notas: 
-        + 
-*   Autor: Rodrigo Palomo 
  */
 
 import java.util.Random;
-
 
 public class Utilidades {
     

@@ -1,9 +1,13 @@
 package Server.fabrica_galletas;
 
+/******************************************
+ * Implementacion clase empaquetador
+ *****************************************/
 import Server.misc.Logger;
 import Server.misc.Utilidades;
 
 public class Empaquetador extends Thread {
+
     private String id;
     private Horno hornoAsignado;
     private Almacen almacen;
@@ -11,7 +15,7 @@ public class Empaquetador extends Thread {
     private Logger logger;
     private String estado;
     private int tanda = 0;
-    
+
     public Empaquetador(String id, Horno hornoAsignado, Almacen almacen, Logger logger) {
         this.id = id;
         this.hornoAsignado = hornoAsignado;
@@ -25,13 +29,16 @@ public class Empaquetador extends Thread {
         return estado;
     }
 
+    public int getTanda() {
+        return tanda;
+    }
+
     /**
-     * OBJ: Recoger galletas del horno asignado y actualizarlas al contador del empaquetador.
-     * PRE: El horno debe estar inicializado y asignado correctamente.
-     * POST: Si hay galletas disponibles en el horno, las recoge y las suma al total del empaquetador.
-     *       Si no hay galletas, espera un tiempo antes de reintentar.
-     *
-     * @throws InterruptedException si ocurre una interrupción durante la espera.
+     * OBJ: Recoger galletas del horno asignado y actualizarlas al contador del
+     * empaquetador. PRE: El horno debe estar inicializado y asignado
+     * correctamente. POST: Si hay galletas disponibles en el horno, las recoge
+     * y las suma al total del empaquetador. Si no hay galletas, espera un
+     * tiempo antes de reintentar.
      */
     public void recogerGalletas() throws InterruptedException {
         estado = "Esperando";
@@ -39,10 +46,10 @@ public class Empaquetador extends Thread {
         if (galletasRetiradas > 0) {
             tanda++;
             estado = "Recogiendo tanda";
-            
+
             galletasEmpaquetadas += galletasRetiradas;
-            String mensaje = id + " recogio " + galletasRetiradas + " galletas del " + hornoAsignado.getID() +
-                             ". Total empaquetadas: " + galletasEmpaquetadas;
+            String mensaje = id + " recogio " + galletasRetiradas + " galletas del " + hornoAsignado.getID()
+                    + ". Total empaquetadas: " + galletasEmpaquetadas;
             logger.add(id, mensaje);
             Thread.sleep(Utilidades.numeroRandom(500, 1000));
         } else {
@@ -53,16 +60,14 @@ public class Empaquetador extends Thread {
         }
     }
 
-    public int getTanda() {
-        return tanda;
-    }
-
     /**
-     * OBJ: Transportar las galletas empaquetadas al almacén cuando se alcanzan 100 unidades.
-     * PRE: El almacén debe estar inicializado y el contador de galletas empaquetadas debe ser igual o mayor a 100.
-     * POST: Las galletas empaquetadas son almacenadas y el contador del empaquetador se reinicia.
+     * OBJ: Transportar las galletas empaquetadas al almacén cuando se alcanzan
+     * 100 unidades. PRE: El almacén debe estar inicializado y el contador de
+     * galletas empaquetadas debe ser igual o mayor a 100. POST: Las galletas
+     * empaquetadas son almacenadas y el contador del empaquetador se reinicia.
      *
-     * @throws InterruptedException si ocurre una interrupción durante el transporte.
+     * @throws InterruptedException si ocurre una interrupción durante el
+     * transporte.
      */
     public void transportarAlmacen() throws InterruptedException {
         if (galletasEmpaquetadas >= 100) {
@@ -77,9 +82,10 @@ public class Empaquetador extends Thread {
     }
 
     /**
-     * OBJ: Ciclo principal del empaquetador que recoge galletas y las transporta al almacén.
-     * PRE: Debe haberse inicializado correctamente el horno, el almacén y el logger.
-     * POST: La operación se realiza indefinidamente hasta que el hilo sea interrumpido.
+     * OBJ: Ciclo principal del empaquetador que recoge galletas y las
+     * transporta al almacén. PRE: Debe haberse inicializado correctamente el
+     * horno, el almacén y el logger. POST: La operación se realiza
+     * indefinidamente hasta que el hilo sea interrumpido.
      */
     @Override
     public void run() {

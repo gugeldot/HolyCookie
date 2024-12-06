@@ -1,12 +1,13 @@
 package Server.Main;
 
-import Server.fabrica_galletas.Empaquetador;
-import Server.fabrica_galletas.Cafeteria;
-import Server.fabrica_galletas.Horno;
-import Server.fabrica_galletas.Repostero;
-import Server.fabrica_galletas.Almacen;
+/**************************************************************************************
+* CODIGO PRINCIPAL, MAIN GLOBAL DEL PROGRAMA (INSTANCIADO DE OBJS + GUI + SERVER RMI)
+**************************************************************************************/
+
+import Server.fabrica_galletas.*;
 import Server.misc.Logger;
 import Server.GUI.Principal;
+
 import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
 
@@ -36,12 +37,11 @@ public class Main {
 
         Horno[] hornos = {new Horno("Horno1", MAX_GALLETAS_HORNO, logger),
             new Horno("Horno2", MAX_GALLETAS_HORNO, logger),
-            new Horno("Horno3", MAX_GALLETAS_HORNO, logger)};
+            new Horno("Horno3", MAX_GALLETAS_HORNO, logger) };
 
-        for (Horno horno : hornos) {
+        for (Horno horno : hornos) 
             horno.start();
-        }
-
+        
         Cafeteria cafeteria = new Cafeteria(logger);
 
         // Indexados en array para no perder acceso a cualquiera de ellos
@@ -77,18 +77,15 @@ public class Main {
         if (RMI_ACTIVADO) {
             try {
                 logger.add("Sistema", "RMI INCIANDOSE");
-                // Crear el objeto remoto
+                
                 FabricaGalletasImpl fabrica = new FabricaGalletasImpl(reposteros, hornos, almacen);
 
-                // Crear un registro RMI en el puerto 1099 (puerto predeterminado)
                 LocateRegistry.createRegistry(1099);
-
-                // Registrar el objeto en el registro RMI bajo el nombre "Servicio"
+                
                 Naming.rebind("//localhost/fabrica", fabrica);
 
                 logger.add("Sistema", "Servidor RMI listo...");
-                System.out.println("READY!");
-
+                
             } catch (Exception e) {
                 logger.addE("Sistema", "Error en el servidor RMI: " + e.getMessage());
                 System.out.println(e.getMessage());

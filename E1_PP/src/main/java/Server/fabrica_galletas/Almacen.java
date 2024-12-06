@@ -1,17 +1,14 @@
 package Server.fabrica_galletas;
 
+/*
+   Objetivo: Implementacion del almacen
+    Notas: 
+        + Se ha usado monitores para una implementación más entendible
+ */
 
 import Server.misc.Logger;
 
 
-/*
-*   Objetivo: Implementacion del almacen
-    Notas: 
-        + Aproximación mediante locks 
-        + He usado locks y no semaforos porque veia poco intuitivo de entender
-            e interorizar.
-*   Autor: Rodrigo Palomo 
- */
 public class Almacen {
 
     // Atributos
@@ -19,9 +16,7 @@ public class Almacen {
     private int CAPACIDAD_MAXIMA;
     private int capacidad_actual = 0; //READONLY por el resto
     private String ID; //READONLY
-    private int consumidas = 0;
-
-    // Locks & Conditions
+    private int consumidas = 0; // Para cliente RMI
 
 
 
@@ -31,6 +26,11 @@ public class Almacen {
         this.logger = logger;
     }
 
+     /*
+            OBJ: getter galletas consumidas (Cliente rmi)
+            PRE: -
+            POST: -  
+     */
     public int getConsumidas() {
         return consumidas;
     }
@@ -56,7 +56,7 @@ public class Almacen {
 
     /*
             OBJ: Almacena en capacidad actual en numero de galletas indicado
-                 Usa exclusion mutua mendiante locks y conditions
+                 Usa exclusion mutua mendiante  monitores
             PRE: -
             POST: Capacidad actual actualizada o hilo en espera para ello  
      */
@@ -66,7 +66,6 @@ public class Almacen {
             synchronized (this) {
                 // Esperar si no hay suficiente espacio en el almacén
                 while (getCapacidad_actual() + cantidad > CAPACIDAD_MAXIMA) {
-                    //System.out.println("Capacidad actual: " + getCapacidad_actual());
                     logger.add(ID, autor, "Capacidad máxima alcanzada, esperando turno...");
                     wait();
                 }
@@ -74,7 +73,7 @@ public class Almacen {
                 // Agregar las galletas al almacén
                 capacidad_actual += cantidad;
 
-                //System.out.println("Se almacenaron " + cantidad + " galletas. Capacidad actual: " + capacidad_actual);
+                
                 logger.add(ID, autor, "Se almacenaron " + cantidad + " galletas. Capacidad actual: " + capacidad_actual);
 
                 // Notificar a todos los hilos que podrían estar esperando
@@ -86,10 +85,13 @@ public class Almacen {
             logger.addE(ID,"Hilo interrumpido: " + e.getMessage());
         }
     }   
+    
         /*
             OBJ: Consume galletas del almacen
                  Usa exclusion mutua mendiante locks y conditions
-            PRE: Pensada para interaccion por boton en interfaz "Comer"
+            PRE: Pensada para interaccion por boton en interfaz "Comer" 
+                 \-> Por eso no hay waits ni ningun tipo de mecanismo de exclusion, 
+                     si no hay suficientes galletas el consumo es 0 
             POST: Capacidad actual actualizada o hilo en espera para ello 
          */
     public synchronized void comer() {

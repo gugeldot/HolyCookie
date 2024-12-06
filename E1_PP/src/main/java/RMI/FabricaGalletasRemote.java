@@ -3,8 +3,8 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
- *
- * @author Gugeldot
+ * Interfaz compartida entre Cliente y Servidor 
+ * (Por eso está en un paquete separado del resto)
  */
 public interface FabricaGalletasRemote extends Remote {
     

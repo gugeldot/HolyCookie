@@ -2,6 +2,10 @@ package Server.fabrica_galletas;
 
 import Server.misc.Logger;
 
+/*
+*   Objetivo: Manejar el uso de la cafetera 
+ */
+
 
 public class Cafeteria {
     

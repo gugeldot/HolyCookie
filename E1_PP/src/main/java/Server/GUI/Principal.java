@@ -1,19 +1,13 @@
 package Server.GUI;
 
-import Server.fabrica_galletas.Empaquetador;
-import Server.fabrica_galletas.Cafeteria;
-import Server.fabrica_galletas.Horno;
-import Server.fabrica_galletas.Repostero;
-import Server.fabrica_galletas.Almacen;
+import Server.fabrica_galletas.*;
 import java.awt.Color;
-import java.awt.Image;
-import java.awt.Toolkit;
 import javax.swing.JProgressBar;
 
-/**
- *
- * @author Gugeldot
- */
+/************************************
+ * INTERFAZ PRINCIPAL DEL SERVIDOR
+ ************************************/
+
 public class Principal extends javax.swing.JFrame implements Runnable {
 
     Horno[] hornos;
@@ -22,12 +16,20 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     Almacen almacen;
     Empaquetador[] empaquetadores;
 
+    //Hilos de animación de cada barra declarados vacios
+    // Solucion a que si los crea la interfaz (hilo GUI) se congela toda esta esperando
+    // Relacionado con metodo: animacionBarra
+    private Thread hiloAnimacionBarraH1 = null;
+    private Thread hiloAnimacionBarraH2 = null;
+    private Thread hiloAnimacionBarraH3 = null;
+    
+    
     public Principal(Cafeteria cafe, Repostero[] reposteros, Horno[] hornos, Empaquetador[] empaquetadores, Almacen almacen) {
         initComponents();
-
-        setLocationRelativeTo(null); // Centra la ventana en la pantalla
-        setTitle("Fabrica Galletas -- Menu Principal "); // Asigna el título de la ventana
-
+        
+        // Centra la ventana en la pantalla
+        setLocationRelativeTo(null); 
+        
         this.cafe = cafe;
         this.hornos = hornos;
         this.reposteros = reposteros;
@@ -35,42 +37,66 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         this.empaquetadores = empaquetadores;
     }
 
+    /*
+            OBJ: Devuelve string con los nombres de los reposteros que estan  
+                 descansando pero no usando la cafetera
+            PRE: -
+            POST: String listo para poner en stdout
+    */
     public String getEstadoCafetera2() {
         String resultado = " ";
+        
         for (Repostero rep : reposteros) {
             if (rep.isDescansando() && !rep.getID().equals(cafe.getIdOcupado())) {
                 resultado += rep.getID() + ", ";
             }
         }
 
-        // Eliminar la última coma y espacio si la longitud es mayor que 1
+        // Eliminar la última coma y espacio si la longitud es mayor que 1 
+        // Puramente estetico
         if (resultado.length() > 1) {
             resultado = resultado.substring(0, resultado.length() - 2);
         }
 
         return resultado;
     }
-
-// Retorna color de las casillas del estado empaquetador
+    
+    /*
+            OBJ: Retorna color de las casillas del estado empaquetador 
+            PRE: -
+            POST: 
+            NOTA:   Hemos hecho esto para no tener que repetir 
+                    constantemente el mismo codigo para 5 casillas 
+                    por cada empaquetador 
+    */
     public Color colorTandaEmpaquetador(int indice, int pos) {
         // Se puede quitar si se quiere que cuando transporte se quede en rojo
         boolean blankLlenado = !hornos[indice].isHorneando();
-        boolean blankTransporte = true; //!empaquetadores[indice].getEstado().equals("Transportando");
+        
+        
+        boolean blankTransporte = true; //Anteriormente: !empaquetadores[indice].getEstado().equals("Transportando");
         if (empaquetadores[indice].getTanda() >= pos && blankLlenado && blankTransporte) {
             return Color.red;
         } else {
             return Color.white;
         }
     }
-
-    // Variable para almacenar los hilos de animación de cada barra
-    // Si no se crean la interfaz (hilo principal se congela) 
-    private Thread hiloAnimacionBarraH1 = null;
-    private Thread hiloAnimacionBarraH2 = null;
-    private Thread hiloAnimacionBarraH3 = null;
-
+    
+    /*
+            OBJ: Animacion de cada una de las barras del horno comprobando su situacion
+            PRE: -
+            POST: 
+            NOTA: Cada barra es en si un hilo, para que el therad.sleep no afecte 
+                  al hilo principal, en este caso la interfaz completa. 
+                  Si no se hace esto la interfaz va a trompicones y todas las barras 
+                  van iguales al mismo tiempo.
+    */
+    
     public void animacionBarra(JProgressBar barra, Horno horno, int hornoIndex) {
+        
         // Verificar si ya existe un hilo para esta barra, y si no, crear uno nuevo
+        // Si no se hace esto se crean infinitos hilos una vez salta
+        
         if (horno.isHorneando()) {
             // Comprobar si el hilo ya está en ejecución para no creear uno nuevo 
             if ((hornoIndex == 0 && hiloAnimacionBarraH1 == null)
@@ -83,8 +109,8 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                     public void run() {
                         try {
                             // Tiempo total de la animación (8 segundos)
-                            int tiempoTotal = 8000;  // 8 segundos = 8000 milisegundos
-                            int unidadesPorAvance = 1;  // Aumentar la barra en 1 unidad por vez
+                            int tiempoTotal = 8000;  
+                            int unidadesPorAvance = 1;  // Aumentar la barra en 1 unidad por vez (a mas unidades menos fluido)
                             int totalAvances = 100 / unidadesPorAvance;  // Número de avances (100 avances)
 
                             // Configurar la barra para que empiece en 0
@@ -94,7 +120,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                             // Ciclo para actualizar la barra de progreso
                             for (int i = 0; i <= 100; i += unidadesPorAvance) {
                                 barra.setValue(i);  // Actualiza el valor de la barra
-                                Thread.sleep(tiempoTotal / totalAvances);  // Espera para cada avance (400 ms)
+                                Thread.sleep(tiempoTotal / totalAvances);  // Espera para cada avance (400 ms) (en este caso)
                             }
                         } catch (InterruptedException ex) {
                             ex.printStackTrace();
@@ -127,13 +153,12 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 animacionThread.start();
             }
         } else if (horno.isHorneadas()) {
-            // Si el horno ha terminado, llenamos la barra
+            // Si el horno ha terminado, llenamos la barra (verde)
             barra.setValue(100);  // La barra se llena
             barra.setForeground(Color.green);
         } else if (!horno.isHorneadas() && !horno.isHorneando()) {
             // Se  vacia si esta cargandose 
-            barra.setValue(0);  // La barra se llena
-
+            barra.setValue(0);  
         }
     }
 
@@ -207,7 +232,6 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         setMaximumSize(new java.awt.Dimension(1060, 701));
         setMinimumSize(new java.awt.Dimension(1060, 701));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1060, 701));
         setResizable(false);
         setSize(new java.awt.Dimension(1060, 701));
 
@@ -794,11 +818,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             estado_almacen.setText(String.valueOf(almacen.getCapacidad_actual()));
 
             // Descanso minimo para no saturar memoria
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException ex) {
-                System.out.println(ex);
-            }
+            try { Thread.sleep(100); } catch (InterruptedException ex) { System.out.println(ex); }
         }
     }
 

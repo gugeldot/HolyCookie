@@ -1,32 +1,41 @@
 package ClienteRMI.GUI;
 
-import RMI.FabricaGalletasRemote;
+/***************************************************
+ *           Interfaz de cliente RMI 
+ *************************************************/
 
+
+import RMI.FabricaGalletasRemote;
 import java.awt.Color;
 import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javax.swing.JButton;
 import javax.swing.JProgressBar;
 
 public class MenuCliente extends javax.swing.JFrame implements Runnable {
 
+    // Clase de RMI
     private FabricaGalletasRemote fabrica;
-    private boolean toggle1 = false;
-    private boolean toggle2 = false;
-    private boolean toggle3 = false;
-    private boolean toggle4 = false;
-    private boolean toggle5 = false;
 
+    // Booleano por cada boton de parar/resume
+    private boolean toggle1 = false, toggle2 = false, toggle3 = false, toggle4 = false, toggle5 = false;
+
+    /*
+    * Constructor
+     */
     public MenuCliente(FabricaGalletasRemote fabrica) {
         initComponents();
-        setLocationRelativeTo(null); // Centra la ventana en la pantalla
-        setTitle("Fabrica Galletas -- Menu de Cliente Remoto "); // Asigna el título de la ventana
+        // Centra la ventana en la pantalla
+        setLocationRelativeTo(null);
         this.fabrica = fabrica;
-
     }
 
+    /*
+            OBJ: Animacion cambio de aspecto y texto de un boton en funcion de
+                 una variable booleana
+            PRE: -
+            POST:
+            NOTA: Parte solo estética
+     */
     private void toggleButton(JButton boton, boolean toggle) {
         if (toggle) {
             boton.setText("RESUME");
@@ -39,6 +48,12 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
         }
     }
 
+    /*
+            OBJ: Segun el estado del booleano perteneciente a su boton parar/resume
+                 correspondiente para o reanuda el repostero indicado
+            PRE: Indice repostero en limites existentes [0-2]
+            POST: Repostero parado/reanudado
+     */
     private void toggleAction(boolean toggle, int indiceRep) throws RemoteException {
         if (toggle) { // Parar
             fabrica.parar(indiceRep);
@@ -665,52 +680,57 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
 
     private void boton_rep3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_rep3ActionPerformed
         try {
+            // Cambio sistematico del valor del booleano (switch)
             toggle3 = !toggle3;
             toggleButton(boton_rep3, toggle3);
             toggleAction(toggle3, 2);
         } catch (RemoteException ex) {
-            Logger.getLogger(MenuCliente.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
 
     }//GEN-LAST:event_boton_rep3ActionPerformed
 
     private void boton_rep2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_rep2ActionPerformed
         try {
+            // Cambio sistematico del valor del booleano (switch)
             toggle2 = !toggle2;
             toggleButton(boton_rep2, toggle2);
             toggleAction(toggle2, 1);
         } catch (RemoteException ex) {
-            Logger.getLogger(MenuCliente.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
     }//GEN-LAST:event_boton_rep2ActionPerformed
 
     private void boton_rep1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_rep1ActionPerformed
         try {
+            // Cambio sistematico del valor del booleano (switch)
             toggle1 = !toggle1;
             toggleButton(boton_rep1, toggle1);
             toggleAction(toggle1, 0);
         } catch (RemoteException ex) {
-            Logger.getLogger(MenuCliente.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
     }//GEN-LAST:event_boton_rep1ActionPerformed
 
     private void boton_rep4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_rep4ActionPerformed
         try {
+            // Cambio sistematico del valor del booleano (switch)
             toggle4 = !toggle4;
             toggleButton(boton_rep4, toggle4);
             toggleAction(toggle4, 3);
         } catch (RemoteException ex) {
-            Logger.getLogger(MenuCliente.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
     }//GEN-LAST:event_boton_rep4ActionPerformed
 
     private void boton_rep5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_rep5ActionPerformed
         try {
+            // Cambio sistematico del valor del booleano (switch)
             toggle5 = !toggle5;
             toggleButton(boton_rep5, toggle5);
             toggleAction(toggle5, 4);
         } catch (RemoteException ex) {
-            Logger.getLogger(MenuCliente.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
     }//GEN-LAST:event_boton_rep5ActionPerformed
 
@@ -719,12 +739,11 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_botonCerrarMouseClicked
 
     private void botonCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCerrarMouseEntered
-
         botonCerrar.setBackground(Color.red);
     }//GEN-LAST:event_botonCerrarMouseEntered
 
     private void botonCerrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCerrarMouseExited
-        botonCerrar.setBackground(new Color(72,24,29));
+        botonCerrar.setBackground(new Color(72, 24, 29));
     }//GEN-LAST:event_botonCerrarMouseExited
 
     private void botonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCerrarActionPerformed
@@ -732,16 +751,16 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_botonCerrarActionPerformed
 
     private void botonMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonMinMouseClicked
-        setState(MenuCliente.ICONIFIED);
+        setState(MenuCliente.ICONIFIED); // Minimizar
     }//GEN-LAST:event_botonMinMouseClicked
 
     private void botonMinMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonMinMouseEntered
-        botonMin.setBackground(new Color(124,24,29));
+        botonMin.setBackground(new Color(124, 24, 29));
     }//GEN-LAST:event_botonMinMouseEntered
 
     private void botonMinMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonMinMouseExited
 
-        botonMin.setBackground(new Color(72,24,29));
+        botonMin.setBackground(new Color(72, 24, 29));
     }//GEN-LAST:event_botonMinMouseExited
 
     private void botonMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMinActionPerformed
@@ -753,12 +772,11 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_botonCerrar1MouseClicked
 
     private void botonCerrar1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCerrar1MouseEntered
-
         botonCerrar.setBackground(Color.red);
     }//GEN-LAST:event_botonCerrar1MouseEntered
 
     private void botonCerrar1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCerrar1MouseExited
-        botonCerrar.setBackground(new Color(72,24,29));
+        botonCerrar.setBackground(new Color(72, 24, 29));
     }//GEN-LAST:event_botonCerrar1MouseExited
 
     private void botonCerrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCerrar1ActionPerformed
@@ -770,12 +788,12 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_botonMin1MouseClicked
 
     private void botonMin1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonMin1MouseEntered
-        botonMin.setBackground(new Color(124,24,29));
+        botonMin.setBackground(new Color(124, 24, 29));
     }//GEN-LAST:event_botonMin1MouseEntered
 
     private void botonMin1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonMin1MouseExited
 
-        botonMin.setBackground(new Color(72,24,29));
+        botonMin.setBackground(new Color(72, 24, 29));
     }//GEN-LAST:event_botonMin1MouseExited
 
     private void botonMin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMin1ActionPerformed
@@ -792,7 +810,7 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_botonCerrar2MouseEntered
 
     private void botonCerrar2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCerrar2MouseExited
-        botonCerrar2.setBackground(new Color(72,24,29));
+        botonCerrar2.setBackground(new Color(72, 24, 29));
     }//GEN-LAST:event_botonCerrar2MouseExited
 
     private void botonCerrar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCerrar2ActionPerformed
@@ -804,12 +822,12 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_botonMin2MouseClicked
 
     private void botonMin2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonMin2MouseEntered
-        botonMin2.setBackground(new Color(124,24,29));
+        botonMin2.setBackground(new Color(124, 24, 29));
     }//GEN-LAST:event_botonMin2MouseEntered
 
     private void botonMin2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonMin2MouseExited
 
-        botonMin2.setBackground(new Color(72,24,29));
+        botonMin2.setBackground(new Color(72, 24, 29));
     }//GEN-LAST:event_botonMin2MouseExited
 
     private void botonMin2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMin2ActionPerformed
@@ -827,27 +845,32 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
         setLocation(x - xMouse, y - yMouse);
     }//GEN-LAST:event_jPanel1MouseDragged
 
-    // 1 segundo de actualizacion es demasiado como para que la representacion sea fluida
-    // se cambia a barra con colores 
+    
+    /*
+            OBJ: Animacion barra de situacion de cada horno
+            PRE: indiceHorno dentro de valores existentes en array hornos [0-2]
+            POST: - 
+            NOTA: Como dice el enunciado, 1 segundo de refresco, demasiado para 
+                  que la animacion de la barra no de problemas de latencia.
+                  Se ha decidido que sea una barra estática de un color u otro
+                  dependiendo de la situacion del horno.
+     */
+    
     public void BarraSimple(JProgressBar barra, int indiceHorno) throws RemoteException {
         boolean horneando = fabrica.isHorneando(indiceHorno);
         boolean horneadas = fabrica.isHorneado(indiceHorno);
-        if (horneando) { //horno.isHorneando()
+        if (horneando) { 
+            // Estado horneado en proceso
             barra.setValue(100);
             barra.setForeground(Color.red);
         } else if (horneadas) {
             // Si el horno ha terminado, llenamos la barra
-            barra.setValue(100);  // La barra se llena
+            barra.setValue(100);  
             barra.setForeground(Color.green);
         } else if (!horneadas && !horneando) {
             // Se  vacia si esta cargandose 
-            barra.setValue(0);  // La barra se llena
-
+            barra.setValue(0);  
         }
-    }
-
-    public static void main(String args[]) {
-
     }
 
     @Override
@@ -879,18 +902,15 @@ public class MenuCliente extends javax.swing.JFrame implements Runnable {
                 BarraSimple(barraH3, 2);
 
             } catch (RemoteException ex) {
-                // Ventana de error
+                
+                // Ventana de error en caso de perdida de conexión con el objeto remoto
                 javax.swing.JOptionPane.showMessageDialog(this, "Se perdió la conexión con el servidor. La aplicación se cerrará.", "Error de conexion RMI", javax.swing.JOptionPane.ERROR_MESSAGE);
 
                 // Salida de la aplicación
                 System.exit(0);
             }
             // Descanso minimo para no saturar memoria
-            try {
-                Thread.sleep(SEGUNDOS_UPDATE * 1000);
-            } catch (InterruptedException ex) {
-                //System.out.println(ex);
-            }
+            try { Thread.sleep(SEGUNDOS_UPDATE * 1000); }catch (InterruptedException ex) {}
         }
     }
 
