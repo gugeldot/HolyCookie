@@ -6,7 +6,7 @@ package Server.Main;
 
 import Server.fabrica_galletas.*;
 import Server.misc.Logger;
-import Server.GUI.Principal;
+import Server.GUI.Interfaz1;
 
 import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
@@ -63,9 +63,9 @@ public class Main {
         ****************************************/
         if (GUI_ACTIVADO) {
             logger.add("Sistema", "GUI Activandose");
-            Principal principal = new Principal(cafeteria, reposteros, hornos, empaquetadores, almacen);
+            Interfaz1 principal = new Interfaz1(cafeteria, reposteros, hornos, empaquetadores, almacen);
             principal.setVisible(true);
-            Thread thread = new Thread(principal); // Pasar Principal como Runnable a un Thread
+            Thread thread = new Thread(principal); // Pasar Interfaz1 como Runnable a un Thread
             thread.start(); // Inicia el hilo, llamando al método run
             logger.add("Sistema", "GUI listo...");
         }

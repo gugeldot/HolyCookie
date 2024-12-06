@@ -8,7 +8,7 @@ import javax.swing.JProgressBar;
  * INTERFAZ PRINCIPAL DEL SERVIDOR
  ************************************/
 
-public class Principal extends javax.swing.JFrame implements Runnable {
+public class Interfaz1 extends javax.swing.JFrame implements Runnable {
 
     Horno[] hornos;
     Cafeteria cafe;
@@ -24,7 +24,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     private Thread hiloAnimacionBarraH3 = null;
     
     
-    public Principal(Cafeteria cafe, Repostero[] reposteros, Horno[] hornos, Empaquetador[] empaquetadores, Almacen almacen) {
+    public Interfaz1(Cafeteria cafe, Repostero[] reposteros, Horno[] hornos, Empaquetador[] empaquetadores, Almacen almacen) {
         initComponents();
         
         // Centra la ventana en la pantalla
@@ -229,7 +229,6 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setForeground(new java.awt.Color(255, 255, 255));
-        setMaximumSize(new java.awt.Dimension(1060, 701));
         setMinimumSize(new java.awt.Dimension(1060, 701));
         setUndecorated(true);
         setResizable(false);
@@ -758,7 +757,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_botonCerrarMouseExited
 
     private void botonMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonMinMouseClicked
-       setState(Principal.ICONIFIED);
+       setState(Interfaz1.ICONIFIED);
     }//GEN-LAST:event_botonMinMouseClicked
 
     private void botonMinMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonMinMouseEntered
